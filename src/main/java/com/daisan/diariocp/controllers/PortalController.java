@@ -26,7 +26,6 @@ public class PortalController {
     
     @GetMapping("/inner-page")
     public String innerPage() throws ErrorService{
-        //userService.AddAdmin("Admin", "Istrador", "1234567", "Admin@daisan.com");
         return "inner-page.html";
     }
     
@@ -49,16 +48,17 @@ public class PortalController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @GetMapping("/singup")
-    public String singup(){
-        return "singup.html";
+    @GetMapping("/register")
+    public String register(){
+        return "register.html";
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/adduser")
-    public String adduser(@RequestParam String name, @RequestParam String lastname, @RequestParam String email, @RequestParam String password1, @RequestParam String password2){     
+    public String adduser(@RequestParam String name, @RequestParam String lastName, @RequestParam String email, @RequestParam String password1, @RequestParam String password2){     
         if(password1.equals(password2)){
             try {
-                userService.AddUser(name, lastname, password1, email);
+                userService.AddUser(name, lastName, password1, email);
             } catch (ErrorService ex) {
                 System.out.println(ex.getMessage());
             }
@@ -67,6 +67,6 @@ public class PortalController {
             System.out.println("passwords must be equals!");
         }
        
-        return "singup.html";
+        return "admin_panel.html";
     }
 }
