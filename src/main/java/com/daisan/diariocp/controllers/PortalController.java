@@ -57,7 +57,7 @@ public class PortalController {
     
     @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
     @GetMapping("/profile")
-    public String login_s(){
+    public String profile(){
         return "profile.html";
     }
     
