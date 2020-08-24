@@ -109,7 +109,6 @@ public class UsuarioServices implements UserDetailsService{
             GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_ADMIN");
             if(myUser.getUsuarioTag() == UsuarioTag.ADMIN){
                 perms.add(p1);
-                System.out.println("Admin User");
             } 
             
             GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_EDITOR");
