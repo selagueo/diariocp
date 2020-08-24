@@ -16,7 +16,7 @@ and open the template in the editor.
             <p th:if="${session.userSession != null}" th:text="${session.userSession.name}"></p>
             <p th:if="${session.userSession != null}" th:text="${session.userSession.lastName}"></p>
             <p th:if="${session.userSession != null}" th:text="${session.userSession.mail}"></p>
-            <p th:if="${session.userSession != null}" th:text="${session.userSession.type}"></p>
+            <p th:if="${session.userSession != null}" th:text="${session.userSession.usuarioTag}"></p>
             <a href="/singup">SingUp</a><br>
         </div>
     </body>
