@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login Success</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <h1>AdminPanel</h1>
+            
+            <h2>Usuarios</h2>
+            <table>
+                <tr><th>Nombre</th><th>Apellido</th><th>Mail</th></tr>
+                <tr th:each="user: ${usersByTag}">
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.mail}"></td>
+                </tr>
+            </table>
+            
+            <br><br><a href="/singup">Create nuevo Editor</a>
+        </div>
+    </body>
+</html>

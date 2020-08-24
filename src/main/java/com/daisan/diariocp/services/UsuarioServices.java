@@ -69,6 +69,11 @@ public class UsuarioServices implements UserDetailsService{
     }
     
     
+    public List<Usuario> LoadUsuariosByTag(UsuarioTag tag){
+        List<Usuario> usuarios = userRepo.GetUsuarioByUserTag(tag);      
+        return usuarios;
+    }
+    
     private void validate(String name, String lastName, String mail, String password) throws ErrorService {
         /*
          This method is for validating name, last name, mail and password; if any of those are not valid, this
