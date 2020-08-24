@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ArticleServices {
@@ -30,7 +31,7 @@ public class ArticleServices {
     private PhotoRepository photoRepo;
     
     @Transactional
-    public void AddPost(String title, String synthesis, String content, String tags1) throws ErrorService{
+    public void AddPost(String title, String synthesis, String content, String tags1, MultipartFile photo) throws ErrorService{
        
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
