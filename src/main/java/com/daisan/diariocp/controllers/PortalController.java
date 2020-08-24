@@ -1,13 +1,18 @@
 package com.daisan.diariocp.controllers;
 
+
 import com.daisan.diariocp.entities.Photo;
 import com.daisan.diariocp.enums.Category;
+
+import com.daisan.diariocp.enums.UsuarioTag;
+
 import com.daisan.diariocp.errors.ErrorService;
 import com.daisan.diariocp.services.ArticleServices;
 import com.daisan.diariocp.services.UsuarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,33 +32,41 @@ public class PortalController {
         return "index.html";
     }
     
+    @GetMapping("/inner-page")
+    public String innerPage() throws ErrorService{
+        return "inner-page.html";
+    }
+    
     @GetMapping("/login")
     public String login(){
         return "login.html";
     }
     
     @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
-    @GetMapping("/login_s")
+    @GetMapping("/profile")
     public String login_s(){
-        return "login_s.html";
+        return "profile.html";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @GetMapping("/admin_panel")
+    public String admin_panel(Model model){
+        model.addAttribute("usersByTag", userService.LoadUsuariosByTag(UsuarioTag.EDITOR));
+        return "admin_panel.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @GetMapping("/singup")
-    public String singup(){
-        return "singup.html";
+    @GetMapping("/register")
+    public String register(){
+        return "register.html";
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/adduser")
-    public String adduser(@RequestParam String name, @RequestParam String lastname, @RequestParam String email, @RequestParam String password1, @RequestParam String password2){
-//        System.out.println("name:"+name);
-//        System.out.println("lastname:"+lastname);
-//        System.out.println("email:"+email);
-//        System.out.println("password:"+password1);
-        
+    public String adduser(@RequestParam String name, @RequestParam String lastName, @RequestParam String email, @RequestParam String password1, @RequestParam String password2){     
         if(password1.equals(password2)){
             try {
-                userService.AddUser(name, lastname, password1, email);
+                userService.AddUser(name, lastName, password1, email);
             } catch (ErrorService ex) {
                 System.out.println(ex.getMessage());
             }
@@ -62,7 +75,7 @@ public class PortalController {
             System.out.println("passwords must be equals!");
         }
        
-        return "singup.html";
+        return "register_success.html";
     }
     
     

@@ -69,6 +69,11 @@ public class UsuarioServices implements UserDetailsService{
     }
     
     
+    public List<Usuario> LoadUsuariosByTag(UsuarioTag tag){
+        List<Usuario> usuarios = userRepo.GetUsuarioByUserTag(tag);      
+        return usuarios;
+    }
+    
     private void validate(String name, String lastName, String mail, String password) throws ErrorService {
         /*
          This method is for validating name, last name, mail and password; if any of those are not valid, this
@@ -104,7 +109,6 @@ public class UsuarioServices implements UserDetailsService{
             GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_ADMIN");
             if(myUser.getUsuarioTag() == UsuarioTag.ADMIN){
                 perms.add(p1);
-                System.out.println("Admin User");
             } 
             
             GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_EDITOR");
