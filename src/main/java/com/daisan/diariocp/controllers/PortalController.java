@@ -18,7 +18,7 @@ public class PortalController {
     
     @GetMapping("/")
     public String index() throws ErrorService{
-        //userService.AddAdmin("Manuel", "Cabrerizo", "hola", "manuelcabrerizo5@gmail.com");
+        //userService.AddAdmin("Admin", "Istrador", "1234567", "Admin@daisan.com");
         return "index.html";
     }
     
