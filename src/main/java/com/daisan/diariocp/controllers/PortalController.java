@@ -24,6 +24,12 @@ public class PortalController {
         return "index.html";
     }
     
+    @GetMapping("/inner-page")
+    public String innerPage() throws ErrorService{
+        //userService.AddAdmin("Admin", "Istrador", "1234567", "Admin@daisan.com");
+        return "inner-page.html";
+    }
+    
     @GetMapping("/login")
     public String login(){
         return "login.html";
