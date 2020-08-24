@@ -13,7 +13,11 @@ public enum Category {
 	public String getUserClass() {
 		return category;
 	}
-
+        
+        public void setCategory(String category){
+            this.category = category;
+        }
+        
 	public String toString() {
 		return category;
 	}

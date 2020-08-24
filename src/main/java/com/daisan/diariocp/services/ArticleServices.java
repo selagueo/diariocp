@@ -1,37 +1,66 @@
 package com.daisan.diariocp.services;
 
 import com.daisan.diariocp.entities.Article;
+import com.daisan.diariocp.entities.Photo;
+import com.daisan.diariocp.entities.Tags;
 import com.daisan.diariocp.entities.Usuario;
 import com.daisan.diariocp.enums.Category;
 import com.daisan.diariocp.errors.ErrorService;
 import com.daisan.diariocp.repositories.ArticleRepository;
+import com.daisan.diariocp.repositories.PhotoRepository;
+import com.daisan.diariocp.repositories.TagsRepository;
 import com.daisan.diariocp.repositories.UsuarioRepository;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 public class ArticleServices {
- @Autowired
+    @Autowired
     private ArticleRepository articleRepo;
     @Autowired
     private UsuarioRepository usuarioRepo;
+    @Autowired
+    private TagsRepository tagsRepo;
+    @Autowired
+    private PhotoRepository photoRepo;
     
     @Transactional
-    public void AddPost(String userId, String title, String synthesis, String content, Category category) throws ErrorService{
+    public void AddPost(String title, String synthesis, String content, String tags1) throws ErrorService{
+       
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession(true);
+        Usuario usuario = (Usuario)session.getAttribute("userSession");
+        if(usuario != null)
+        {
+            Validate(title, synthesis, content);
+
+            Article arcticle = new Article();
+            
+            if(!tags1.isEmpty())
+            {
+                String[] tags2 = tags1.split(" ");
+                for(String tag1 : tags2)
+                {
+                    Tags tag = new Tags();
+                    tag.setArticle(arcticle);
+                    tag.setTag(tag1);
+                    tagsRepo.save(tag);
+                }  
+            }
+
+            arcticle.setTitle(title);
+            arcticle.setSynthesis(synthesis);
+            arcticle.setContent(content);
+            arcticle.setDate(new Date());
+            arcticle.setUsuario(usuario);
+            articleRepo.save(arcticle);
+        }
         
-        Usuario user = usuarioRepo.findById(userId).get();
-        Validate(title, synthesis, content);
-        Article arcticle = new Article();
-        arcticle.setTitle(title);
-        arcticle.setSynthesis(synthesis);
-        arcticle.setContent(content);
-        arcticle.setCategory(category);
-        arcticle.setDate(new Date());
-        arcticle.setUsuario(user);
-        
-        articleRepo.save(arcticle);
     }
     
     @Transactional
@@ -56,5 +85,7 @@ public class ArticleServices {
         if(content == null || content.isEmpty()){
             throw new ErrorService("content cannot be empty");
         }
+ 
+
     }
 }

@@ -2,6 +2,7 @@ package com.daisan.diariocp.entities;
 
 import com.daisan.diariocp.enums.Category;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -31,6 +32,7 @@ public class Article {
     
     @ManyToOne
     private Usuario usuario;
+    
     
     
     /*
@@ -111,6 +113,9 @@ public class Article {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+
+
 
     
     
