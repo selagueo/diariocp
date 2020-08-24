@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>addArticle</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <h1>Crea Un Articulo</h1>
+        </div>
+        <div>
+            <form action="/createArticle" method="POST" enctype="multipart/form-data"/>
+                <label for="title">title</label><br>
+                <input type="text" name="title" id="title"/><br>
+                
+                <label for="Sintesis">Sintesis</label><br>
+                <textarea name="synthesis" id="Sintesis" cols="30" rows="10"></textarea><br>
+
+                <label for="Desarrollo">Desarrollo</label><br>
+                <textarea name="content" id="Desarrollo" cols="30" rows="10"></textarea><br>
+
+                <label for="Categorias">Ingresa la categoria</label>
+                <select class="" name="category" id="Categorias">
+                    <option value=""></option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Asia y Medio Oriente">Asia y Medio Oriente</option>
+                    <option value="África">África</option>
+                    <option value="Estados Unidos">Estados Unidos</option>
+                    <option value="Europa">Europa</option>
+                    <option value="Historia">Historia</option>
+                    <option value="Latinoamérica">Latinoamérica</option>
+                    <option value="Avisos">Avisos</option>
+                </select>  <br>
+               
+                <label for="foto">foto</label><br>
+                <input type="file" name="photo" id="foto"> <br>
+                
+                <label for="Tags">Agrega tags para buscar la noticia</label><br>
+                <textarea name="tags" id="Tags" cols="30" rows="5"></textarea><br>
+
+            
+                <button type="submit">Crear</button><br>
+                
+            </form>
+        </div>
+    </body>
+</html>
+

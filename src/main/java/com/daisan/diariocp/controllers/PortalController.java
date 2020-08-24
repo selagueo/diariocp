@@ -1,6 +1,9 @@
 package com.daisan.diariocp.controllers;
 
+import com.daisan.diariocp.entities.Photo;
+import com.daisan.diariocp.enums.Category;
 import com.daisan.diariocp.errors.ErrorService;
+import com.daisan.diariocp.services.ArticleServices;
 import com.daisan.diariocp.services.UsuarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PortalController {
     @Autowired
     private UsuarioServices userService;
+    @Autowired
+    private ArticleServices articleService;
     
     @GetMapping("/")
     public String index() throws ErrorService{
@@ -59,4 +64,29 @@ public class PortalController {
        
         return "singup.html";
     }
+    
+    
+    @GetMapping("/addArticle")
+    public String addArticle(){
+        
+        return "createArticle.html";
+    }
+    
+    @PostMapping("/createArticle")
+    public String createArticle(@RequestParam String title, @RequestParam String synthesis,
+                                @RequestParam String content,
+                                @RequestParam String tags){
+        
+        try {
+            articleService.AddPost(title, synthesis, content, tags);
+     
+        } catch (ErrorService ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return "createArticle.html";
+    }
+    
+
 }
+
