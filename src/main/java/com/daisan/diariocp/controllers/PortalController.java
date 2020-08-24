@@ -35,9 +35,9 @@ public class PortalController {
     }
     
     @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
-    @GetMapping("/login_s")
+    @GetMapping("/profile")
     public String login_s(){
-        return "login_s.html";
+        return "profile.html";
     }
     
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
@@ -67,6 +67,6 @@ public class PortalController {
             System.out.println("passwords must be equals!");
         }
        
-        return "admin_panel.html";
+        return "register_success.html";
     }
 }
