@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Conciencia Politica</title>
+  <title>Registrar Usuario</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -54,14 +54,14 @@
 
       <div class="logo float-left">
 
-        <h1 class="text-light"><a href="/"><img src="/img/logo.jpg" alt="" class="img-fluid"><span>
+        <h1 class="text-light"><a href="index.html"><img src="/img/logo.jpg" alt="" class="img-fluid"><span>
               Conciencia Politica</span></a></h1>
 
       </div>
 
       <nav class="nav-menu float-right d-none d-lg-block">
         <ul>
-          <li class="active"><a href="/">Inicio</a></li>
+          <li class="active"><a href="index.html">Inicio</a></li>
           <li><a href="#about">Quienes Somos</a></li>
           <li><a href="#team">Equipo</a></li>
           <li class="drop-down"><a href="">Categorias</a>
@@ -90,25 +90,112 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
+          <h2>Registra un nuevo usuario Editor</h2>
           <ol>
-            <li><a href="/">Inicio</a></li>
-            <li>Inner Page</li>
+            <li><a href="index.html">Inicio</a></li>
+            <li>Register</li>
           </ol>
         </div>
 
       </div>
     </section><!-- End Breadcrumbs Section -->
 
-    <section class="inner-page">
+    <section id="register" class="register">
       <div class="container">
-        <p>
-          Pagina de ejemplo
-        </p>
+
+        <div class="section-title">
+          <h2>Registrar Usuario</h2>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+            <form action="/adduser" method="POST">
+              <div class="form-row">
+
+                <div class="col-lg-6 form-group">
+                  <input type="name" class="form-control" name="name" id="name" placeholder="Nombre"/>
+                  <div class="validate"></div>
+                </div>
+
+                <div class="col-lg-6 form-group">
+                  <input type="name" class="form-control" name="lastName" id="lastName" placeholder="Nombre"/>
+                  <div class="validate"></div>
+                </div>
+
+                <div class="col-lg-6 form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" />
+                  <div class="validate"></div>
+                </div>
+
+                <div class="col-lg-6 form-group">
+                  <input type="password" name="password"id="password" placeholder="Contraseña" data-rule="" data-msg="" />
+                  <div class="validate"></div>
+                </div>
+                
+                <div class="col-lg-6 form-group">
+                  <input type="password" name="password2" id="password2" placeholder="Confirme la contraseña" data-rule="" data-msg="" />
+                  <div class="validate"></div>
+                </div>
+                
+              </div>
+              <div class="text-center"><button type="submit">Registrar Usuario</button></div>
+            </form>
+          </div>
+
+        </div>
+
       </div>
     </section>
 
   </main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>Conciencia Politica</h3>
+            <p>
+              UCA - Av. Alicia Moreau de Justo 1300 <br>
+              C1107 AAZ, Buenos Aires<br><br>
+              <strong>Telefono:</strong> +54 291 572-1221<br>
+              <strong>Correo:</strong> concienciapolitica.uca@gmail.com<br>
+            </p>
+            <div class="social-links mt-3">
+              <a href="https://twitter.com/_concienciapol" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="https://instagram.com/conciencia.politica" class="instagram"><i class="bx bxl-instagram"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4></h4>
+            <ul>
+
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4></h4>
+            <ul>
+
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Suscribite a nuestro Newsletter</h4>
+            <p>Recibi todas las semanas las ultimas noticias a tu correo</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Suscribirse">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong><span>Conciencia Politica</span></strong>. Todos los derechos reservados.
