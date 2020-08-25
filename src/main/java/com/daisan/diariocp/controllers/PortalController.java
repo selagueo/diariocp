@@ -32,31 +32,22 @@ public class PortalController {
     @Autowired
     private ArticleServices articleService;
 
-//    @GetMapping("/")
-//    public String index(ModelMap modelo) throws ErrorService {
-//        //userService.AddAdmin("Admin", "Istrador", "1234567", "Admin@daisan.com");
-//        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//        HttpSession session = attr.getRequest().getSession(true);
-//        Usuario usuario = (Usuario) session.getAttribute("userSession");
-//        if (usuario != null) {
-//            modelo.put("username", usuario.getName());
-//        }
-//        return "index.html";
-//    }
-
     @GetMapping({"/", "{user}"})
     public String userProfile(Model modelo, @PathVariable(required = false) String user) {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
         Usuario usuarioS = (Usuario)session.getAttribute("userSession");
-        if (usuarioS != null) {
-            modelo.addAttribute("username", usuarioS.getName());
-        }
         
         if (user != null) {
             Usuario usuario = userService.getUsuarioByUsername(user);
             if (usuario != null) {
-                modelo.addAttribute("usuario", usuario);
+                if(usuarioS == null){
+                    modelo.addAttribute("usuario", usuario);
+                }
+                else if(!usuario.getId().equals(usuarioS.getId())){
+                    modelo.addAttribute("usuario", usuario);
+                }
+                
                 return "profile.html";
             }
         }
@@ -81,11 +72,11 @@ public class PortalController {
         return "login.html";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
-    @GetMapping("/profile")
-    public String profile() {
-        return "profile.html";
-    }
+//    @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
+//    @GetMapping("/profile")
+//    public String profile() {
+//        return "profile.html";
+//    }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/admin_panel")

@@ -41,40 +41,25 @@ and open the template in the editor.
 <div th:insert="static/inner-page :: inner-page" ></div>
 
 <main id="main">
-    <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
+<section class="inner-page">
+  <div class="container">
 
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
-          <ol>
-            <li><a href="/">Inicio</a></li>
-            <li>Inner Page</li>
-          </ol>
-        </div>
+    <div>
+                    <p th:if="${usuario != null}" th:text="${usuario.name}"></p>
+                    <p th:if="${usuario != null}" th:text="${usuario.lastName}"></p>
+                    <p th:if="${usuario != null}" th:text="${usuario.mail}"></p>
+                    <p th:if="${usuario != null}" th:text="${usuario.usuarioTag}"></p>    
 
-      </div>
-    </section><!-- End Breadcrumbs Section -->
+                    <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.name}"></p>
+                    <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.lastName}"></p>
+                    <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.mail}"></p>
+                    <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.usuarioTag}"></p>
+                </div>
 
-    <section class="inner-page">
-      <div class="container">
+                <a th:if="${session.userSession != null && usuario == null && session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}" href="/admin_panel" th:text="'Panel de Admin'" >a</a><br>
 
-        <div>
-                        <p th:if="${usuario != null}" th:text="${usuario.name}"></p>
-                        <p th:if="${usuario != null}" th:text="${usuario.lastName}"></p>
-                        <p th:if="${usuario != null}" th:text="${usuario.mail}"></p>
-                        <p th:if="${usuario != null}" th:text="${usuario.usuarioTag}"></p>    
-
-                        <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.name}"></p>
-                        <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.lastName}"></p>
-                        <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.mail}"></p>
-                        <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.usuarioTag}"></p>
-                    </div>
-
-                    <a th:if="${session.userSession != null && usuario == null && session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}" href="/admin_panel" th:text="'Panel de Admin'" >a</a><br>
-
-      </div>
-    </section>
+  </div>
+</section>
 
 </main><!-- End #main -->
  

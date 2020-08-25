@@ -51,7 +51,7 @@
                                 class="drop-down">
                                 <a th:text="'Hola, ' + ${session.userSession.name} + '!' "></a>
                                 <ul>
-                                    <li><a style="text-align: right" href="/profile">Mi Perfil</a></li>
+                                    <li><a style="text-align: right" th:href="@{/{user}(user=${session.userSession.mail})}">Mi Perfil</a></li>
                                     <li><a style="text-align: right" href="/admin_panel">Panel Administrador</a></li>
                                     <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
                                     <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
