@@ -44,7 +44,10 @@ public class ArticleServices {
             Validate(title, synthesis, content, category);
             Article article = new Article();
 
-            if(!photo.isEmpty() && (photo.getContentType().equalsIgnoreCase("image/jpeg") ||photo.getContentType().equalsIgnoreCase("image/png")  ))
+            if(!photo.isEmpty() && (photo.getContentType().equalsIgnoreCase("image/jpeg") ||
+                                    photo.getContentType().equalsIgnoreCase("image/jpg")  ||
+                                    photo.getContentType().equalsIgnoreCase("image/bmp")  ||
+                                    photo.getContentType().equalsIgnoreCase("image/png")))
             {
                 try {
                     Photo photoArticle = new Photo();
@@ -60,7 +63,7 @@ public class ArticleServices {
             }
             else
             {
-                throw new ErrorService("the file has to be jpeg or png");
+                throw new ErrorService("the file has to be jpeg, jpg, png or bmp");
             }
           
             if(!tags1.isEmpty())
