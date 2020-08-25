@@ -23,6 +23,7 @@ public class Usuario {
     
     private String id;
     private String mail;
+    private String userName;
     private String password;
     private String name;
     private String lastName;
@@ -45,6 +46,14 @@ public class Usuario {
 
     //Getters and Setters:
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    
     public String getId() {
         return id;
     }
