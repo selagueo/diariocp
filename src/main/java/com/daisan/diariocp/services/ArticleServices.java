@@ -34,18 +34,17 @@ public class ArticleServices {
     private PhotoRepository photoRepo;
     
     @Transactional
-    public void AddPost(String title, String synthesis, String content, String tags1, MultipartFile photo) throws ErrorService{
+    public void AddPost(String title, String synthesis, String content, String tags1, MultipartFile photo, String category) throws ErrorService{
        
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
         Usuario usuario = (Usuario)session.getAttribute("userSession");
         if(usuario != null)
         {
-            Validate(title, synthesis, content);
+            Validate(title, synthesis, content, category);
+            Article article = new Article();
 
-            Article arcticle = new Article();
-      
-            if(!photo.isEmpty())
+            if(!photo.isEmpty() && (photo.getContentType() == "image/jpeg" ||photo.getContentType() == "image/png" ))
             {
                 try {
                     Photo photoArticle = new Photo();
@@ -54,10 +53,14 @@ public class ArticleServices {
                     photoArticle.setName(photo.getName());
                     
                     photoRepo.save(photoArticle);
-                    arcticle.setPhoto(photoArticle);
+                    article.setPhoto(photoArticle);
                 } catch (IOException ex) {
                     Logger.getLogger(ArticleServices.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+            else
+            {
+                throw new ErrorService("the file has to be jpeg or png");
             }
           
             if(!tags1.isEmpty())
@@ -66,18 +69,19 @@ public class ArticleServices {
                 for(String tag1 : tags2)
                 {
                     Tags tag = new Tags();
-                    tag.setArticle(arcticle);
+                    tag.setArticle(article);
                     tag.setTag(tag1);
                     tagsRepo.save(tag);
                 }  
             }
-
-            arcticle.setTitle(title);
-            arcticle.setSynthesis(synthesis);
-            arcticle.setContent(content);
-            arcticle.setDate(new Date());
-            arcticle.setUsuario(usuario);
-            articleRepo.save(arcticle);
+            
+            article.setCategory(searchCategory(category));
+            article.setTitle(title);
+            article.setSynthesis(synthesis);
+            article.setContent(content);
+            article.setDate(new Date());
+            article.setUsuario(usuario);
+            articleRepo.save(article);
         }
         
     }
@@ -94,7 +98,7 @@ public class ArticleServices {
     }
     
     
-    private  void Validate(String title, String synthesis, String content) throws ErrorService{
+    private  void Validate(String title, String synthesis, String content, String category) throws ErrorService{
         if(title == null || title.isEmpty()){
             throw new ErrorService("title cannot be empty");
         }
@@ -104,7 +108,25 @@ public class ArticleServices {
         if(content == null || content.isEmpty()){
             throw new ErrorService("content cannot be empty");
         }
- 
+        if(category == null || category.isEmpty()){
+            throw new ErrorService("category cannot be empty");
+        }
 
+    }
+    
+    private Category searchCategory(String categoty)
+    {
+        switch (categoty)
+        {
+            case "Argentina": return Category.ARGENTINA;
+            case "Asia y Medio Oriente": return Category.ASIA;
+            case "África": return Category.AFRICA;
+            case "Estados Unidos": return Category.EEUU;
+            case "Europa": return Category.EUROPA;
+            case "Historia": return Category.HISTORIA;
+            case "Latinoamérica": return Category.LATINOAMERICA;
+            case "Avisos": return Category.UCA;
+            default : return null;
+        }
     }
 }

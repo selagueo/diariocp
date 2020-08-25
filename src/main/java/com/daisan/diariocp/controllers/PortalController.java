@@ -125,10 +125,10 @@ public class PortalController {
     @PostMapping("/addArticle")
     public String addArticle(@RequestParam String title, @RequestParam String synthesis,
             @RequestParam String content, @RequestParam String tags,
-            @RequestParam MultipartFile photo) {
+            @RequestParam MultipartFile photo, @RequestParam String category) {
 
         try {
-            articleService.AddPost(title, synthesis, content, tags, photo);
+            articleService.AddPost(title, synthesis, content, tags, photo, category);
 
         } catch (ErrorService ex) {
             System.out.println(ex.getMessage());
