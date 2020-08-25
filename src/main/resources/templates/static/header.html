@@ -79,7 +79,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div th:unless="${username != null}">
+                        <div th:unless="${session.userSession != null}">
                             <a></a>
                         </div>
                     </li>
