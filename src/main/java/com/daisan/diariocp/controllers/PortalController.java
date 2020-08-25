@@ -46,7 +46,7 @@ public class PortalController {
 
     @GetMapping({"/", "{user}"})
     public String userProfile(Model modelo, @PathVariable(required = false) String user) {
-                ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
         Usuario usuarioS = (Usuario)session.getAttribute("userSession");
         if (usuarioS != null) {
@@ -63,6 +63,14 @@ public class PortalController {
         return "index.html";
     }
 
+    @GetMapping({"/logout"})
+    public String userLogOut() {
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession(true);
+        session.removeAttribute("userSession");
+        return "index.html";
+    }
+    
     @GetMapping("/inner-page")
     public String innerPage() throws ErrorService {
         return "inner-page.html";
@@ -110,10 +118,10 @@ public class PortalController {
 
     @GetMapping("/addArticle")
     public String addArticle() {
-
         return "createArticle.html";
     }
-
+    
+    @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
     @PostMapping("/createArticle")
     public String createArticle(@RequestParam String title, @RequestParam String synthesis,
             @RequestParam String content, @RequestParam String tags,
