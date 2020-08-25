@@ -116,14 +116,14 @@ public class PortalController {
         return "register_success.html";
     }
 
-    @GetMapping("/addArticle")
-    public String addArticle() {
+    @GetMapping("/createArticle")
+    public String createArticle() {
         return "createArticle.html";
     }
     
     @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
-    @PostMapping("/createArticle")
-    public String createArticle(@RequestParam String title, @RequestParam String synthesis,
+    @PostMapping("/addArticle")
+    public String addArticle(@RequestParam String title, @RequestParam String synthesis,
             @RequestParam String content, @RequestParam String tags,
             @RequestParam MultipartFile photo) {
 
