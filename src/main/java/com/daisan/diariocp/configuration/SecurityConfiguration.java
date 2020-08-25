@@ -39,11 +39,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .loginProcessingUrl("/logincheck")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/profile")
+                .defaultSuccessUrl("/")
                 .permitAll().and()
             .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/profile")
+                .logoutSuccessUrl("/")
                 .permitAll().and()
             .csrf().disable();
     }

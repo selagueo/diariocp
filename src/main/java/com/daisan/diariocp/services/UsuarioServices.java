@@ -48,33 +48,33 @@ public class UsuarioServices implements UserDetailsService {
     @Transactional
     public void AddUser(String name, String lastname, String password, String mail) throws ErrorService {
         validate(name, lastname, mail, password);
-        Usuario myUser = userRepo.GetUserFromMail(mail);
+        Usuario user = userRepo.GetUserFromMail(mail);
         
-        if (myUser == null) {
-            
-            Usuario user = new Usuario();
-            
-            user.setName(name);
-            user.setLastName(lastname);
-            
-            String userName = name + "-" + lastname;
-            
+        if (user == null) {        
+            String userName = name + lastname;   
             Usuario usuarioTest = userRepo.GetUserFromUserName(userName);
-            
+            String newUserName = userName;
+            int i = 1;
             while(usuarioTest != null){
-                userName = userName + "1";
-                usuarioTest = userRepo.GetUserFromUserName(userName);
+                newUserName = userName + i;
+                usuarioTest = userRepo.GetUserFromUserName(newUserName);
+                i++;
             }
-            
+            userName = newUserName;
+            usuarioTest = new Usuario();
+            usuarioTest.setName(name);
+            usuarioTest.setLastName(lastname);
+            usuarioTest.setUserName(userName.toLowerCase());
+                        
             String encripPass = new BCryptPasswordEncoder().encode(password);
-            user.setPassword(encripPass);
+            usuarioTest.setPassword(encripPass);
 
-            user.setMail(mail);
-            user.setRegistration(new Date());
-            user.setUsuarioTag(UsuarioTag.EDITOR);
+            usuarioTest.setMail(mail);
+            usuarioTest.setRegistration(new Date());
+            usuarioTest.setUsuarioTag(UsuarioTag.EDITOR);
 
-            userRepo.save(user);
-        } else {
+            userRepo.save(usuarioTest);
+        } else {     
             throw new ErrorService("mail already in use!");
         }
     }

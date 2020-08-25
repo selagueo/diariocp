@@ -31,7 +31,10 @@ public class PortalController {
     private ArticleServices articleService;
 
     @GetMapping({"/", "{user}"})
-    public String userProfile(Model modelo, @PathVariable(required = false) String user) {
+    public String userProfile(Model modelo, @PathVariable(required = false) String user) throws ErrorService{
+        //CREAR Admin
+        //userService.AddAdmin("Admin", "Istrador", "1234567", "admin@daisansf.com");
+        
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
         Usuario usuarioS = (Usuario)session.getAttribute("userSession");
