@@ -31,8 +31,8 @@
     <link href="/css/style.css" rel="stylesheet">
 </head>
 
-<div th:insert="static/header :: header" ></div>
-<div th:insert="static/inner-page :: inner-page" ></div>
+<div th:insert="static/header :: header"></div>
+<div th:insert="static/inner-page :: inner-page"></div>
 
 <main id="main">
     <section class="inner-page">
@@ -47,10 +47,10 @@
                         <th scope="col">Mail</th>
                         <th style="text-align: center" scope="col">Ver Perfil</th>
                         <th style="text-align: center" scope="col">Modificar</th>
-                        <th style="text-align: center" scope="col">Baja</th>
+                        <th style="text-align: center" scope="col">OFF / ON</th>
                     </tr>
                     <tr th:each="user: ${usersByTag}">
-                        <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16"
+                        <td style="text-align: center"><svg width="2em" height="2em" viewBox="0 0 16 16"
                                 class="bi bi-check-circle-fill" fill="green" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
@@ -60,24 +60,22 @@
                         <td th:text="${user.lastName}"></td>
                         <td><a th:text="${user.mail}" th:href="'mailto:'+${user.mail}"></a></td>
                         <!--<td th:text="${user.mail}" style="font-style: italic" th:value="${user.mail}"></td>-->
-
-                        <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16"
-                                class="bi bi-info-circle-fill" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
+                        <td style="text-align: center"><svg width="2em" height="2em" viewBox="0 0 16 16"
+                                class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                             </svg></td>
-                        <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16"
+                        <td style="text-align: center"><svg width="2em" height="2em" viewBox="0 0 16 16"
                                 class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                 <path fill-rule="evenodd"
                                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                             </svg></td>
-                        <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16"
-                                class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <td style="text-align: center" ><svg width="2em" height="2em" viewBox="0 0 16 16"
+                                class="bi bi-toggle-on" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
-                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                                    d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
                             </svg></td>
                     </tr>
                 </table>
@@ -89,25 +87,25 @@
     </section>
 </main>
 
-    <div th:insert="static/footer :: footer" ></div>
+<div th:insert="static/footer :: footer"></div>
 
-    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
-    <!-- Vendor JS Files -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/vendor/jquery.easing/jquery.easing.min.js"></script>
-    <script src="/vendor/php-email-form/validate.js"></script>
-    <script src="/vendor/jquery-sticky/jquery.sticky.js"></script>
-    <script src="/vendor/venobox/venobox.min.js"></script>
-    <script src="/vendor/waypoints/jquery.waypoints.min.js"></script>
-    <script src="/vendor/counterup/counterup.min.js"></script>
-    <script src="/vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="/vendor/aos/aos.js"></script>
+<!-- Vendor JS Files -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="/vendor/php-email-form/validate.js"></script>
+<script src="/vendor/jquery-sticky/jquery.sticky.js"></script>
+<script src="/vendor/venobox/venobox.min.js"></script>
+<script src="/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="/vendor/counterup/counterup.min.js"></script>
+<script src="/vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/vendor/aos/aos.js"></script>
 
-    <!-- Template Main JS File -->
-    <script src="/js/main.js"></script>
+<!-- Template Main JS File -->
+<script src="/js/main.js"></script>
 
 </body>
 
