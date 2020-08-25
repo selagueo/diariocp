@@ -12,13 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,9 +40,11 @@ public class PortalController {
             Usuario usuario = userService.getUsuarioByUsername(user);
             if (usuario != null) {
                 if(usuarioS == null){
+                    modelo.addAttribute("inner", "Perfil de "+usuario.getName()+" "+usuario.getLastName());
                     modelo.addAttribute("usuario", usuario);
                 }
                 else if(!usuario.getId().equals(usuarioS.getId())){
+                    modelo.addAttribute("inner", "Perfil de "+usuario.getName()+" "+usuario.getLastName());
                     modelo.addAttribute("usuario", usuario);
                 }
                 
@@ -68,7 +68,8 @@ public class PortalController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model modelo) {
+        modelo.addAttribute("inner", "Inicia Sesión");
         return "login.html";
     }
 
@@ -80,14 +81,16 @@ public class PortalController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/admin_panel")
-    public String admin_panel(Model model) {
-        model.addAttribute("usersByTag", userService.LoadUsuariosByTag(UsuarioTag.EDITOR));
+    public String admin_panel(Model modelo) {
+        modelo.addAttribute("inner", "Panel de Administración");
+        modelo.addAttribute("usersByTag", userService.LoadUsuariosByTag(UsuarioTag.EDITOR));
         return "admin_panel.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/register")
-    public String register() {
+    public String register(Model modelo) {
+        modelo.addAttribute("inner", "Registrar Nuevo Editor");
         return "register.html";
     }
 
@@ -108,7 +111,8 @@ public class PortalController {
     }
 
     @GetMapping("/createArticle")
-    public String createArticle() {
+    public String createArticle(Model modelo) {
+        modelo.addAttribute("inner", "Crear Noticia");
         return "createArticle.html";
     }
     
