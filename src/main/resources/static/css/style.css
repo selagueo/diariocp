@@ -8,6 +8,8 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444;
@@ -123,6 +125,20 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   letter-spacing: 3px;
   text-transform: uppercase;
 }
+
+@media (max-width: 375px) {
+    
+    #header .logo h1 {
+      font-size: 15px;
+      margin: 0;
+      padding: 10px 0;
+      line-height: 1;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+}
+
 
 #header .logo h1 a, #header .logo h1 a:hover {
   color: #1c5c93;
@@ -1481,3 +1497,5 @@ section {
 #footer .credits a {
   color: #9eccf4;
 }
+
+
