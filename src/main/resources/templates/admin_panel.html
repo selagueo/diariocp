@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http:/www.thymeleaf.org">
 
-    <head>
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Conciencia Politica</title>
-        <meta content="" name="descriptison">
-        <meta content="" name="keywords">
+    <title>Conciencia Politica</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
 
-        <!-- Favicons -->
-        <link href="/img/logo.jpg" rel="icon">
-        <link href="/img/logo.jpg" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="/img/logo.jpg" rel="icon">
+    <link href="/img/logo.jpg" rel="apple-touch-icon">
 
-        <!-- Google Fonts -->
-        <link
-            href="https:/fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
-            rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https:/fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
+        rel="stylesheet">
 
-        <!-- Vendor CSS Files -->
-        <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/vendor/icofont/icofont.min.css" rel="stylesheet">
-        <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
-        <link href="/vendor/venobox/venobox.css" rel="stylesheet">
-        <link href="/vendor/owl.carousel/owl.carousel.min.css" rel="stylesheet">
-        <link href="/vendor/aos/aos.css" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/vendor/owl.carousel/owl.carousel.min.css" rel="stylesheet">
+    <link href="/vendor/aos/aos.css" rel="stylesheet">
 
-        <!-- Template Main CSS File -->
-        <link href="/css/style.css" rel="stylesheet">
-    </head>
+    <!-- Template Main CSS File -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
 
-    <body>
+<body>
 
-        <!-- ======= Top Bar ======= -->
-        <section id="topbar" class="d-none d-lg-block">
-            <div class="container clearfix">
-                <div class="contact-info float-left">
-                    <i class="icofont-envelope"></i><a
-                        href="mailto:concienciapolitica.uca@gmail.com">concienciapolitica.uca@gmail.com</a>
-                    <i class="icofont-phone"></i> +54 291 572-1221
-                </div>
-                <div class="social-links float-right">
-                    <a href="https:/instagram.com/conciencia.politica" class="instagram"><i class="icofont-instagram"></i></a>
-                    <a href="https:/twitter.com/_concienciapol" class="twitter"><i class="icofont-twitter"></i></a>
-                </div>
+    <!-- ======= Top Bar ======= -->
+    <section id="topbar" class="d-none d-lg-block">
+        <div class="container clearfix">
+            <div class="contact-info float-left">
+                <i class="icofont-envelope"></i><a
+                    href="mailto:concienciapolitica.uca@gmail.com">concienciapolitica.uca@gmail.com</a>
+                <i class="icofont-phone"></i> +54 291 572-1221
             </div>
-        </section>
+            <div class="social-links float-right">
+                <a href="https:/instagram.com/conciencia.politica" class="instagram"><i
+                        class="icofont-instagram"></i></a>
+                <a href="https:/twitter.com/_concienciapol" class="twitter"><i class="icofont-twitter"></i></a>
+            </div>
+        </div>
+    </section>
 
     <!-- ======= Header ======= -->
     <header id="header">
@@ -77,32 +78,40 @@
                     </li>
                     <li>
                         <div th:if="${username != null}">
-                            <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}" class="drop-down">
+                            <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}"
+                                class="drop-down">
                                 <a th:text="'Hola, ' + ${username} + '!' "></a>
                                 <ul>
                                     <li><a style="text-align: right" href="/profile">Mi Perfil</a></li>
                                     <li><a style="text-align: right" href="/admin_panel">Panel Administrador</a></li>
                                     <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
-                                    <li><a style="text-align: right" href="#"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
-                                        <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
-                                      </svg> Cerrar Sesión</a></li>
+                                    <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
+                                                viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
+                                                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
+                                            </svg> Cerrar Sesión</a></li>
                                 </ul>
                             </div>
-                            <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.EDITOR}" class="drop-down">
+                            <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.EDITOR}"
+                                class="drop-down">
                                 <a th:text="'Hola, ' + ${username} + '!' "></a>
                                 <ul>
                                     <li><a style="text-align: right" href="/profile">Mi Perfil</a></li>
                                     <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
-                                    <li><a style="text-align: right" href="#"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
-                                        <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
-                                      </svg> Cerrar Sesión</a></li>
+                                    <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
+                                                viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
+                                                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
+                                            </svg> Cerrar Sesión</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div th:unless="${username != null}">
-                            <a href="/login">Iniciar Sesión</a>
+                            <a></a>
                         </div>
                     </li>
                 </ul>
@@ -111,79 +120,89 @@
         </div>
     </header><!-- End Header -->
 
+    <main id="main">
 
-
-        <main id="main">
-
-            <!-- ======= Breadcrumbs Section ======= -->
-            <section class="breadcrumbs">
-                <div class="container">
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h2>Panel de Administracion</h2>
-                        <ol>
-                            <li><a href="/">Inicio</a></li>
-                            <li>Inner Page</li>
-                        </ol>
-                    </div>
-
-                </div>
-            </section><!-- End Breadcrumbs Section -->
-
-            <section class="inner-page">
-                <div class="container">
-
-                    <div>
-                        <table class="table table-striped table table-hover">
-                            <tr><th scope="col" style="text-align: center">Estado</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Mail</th>
-                                <th style="text-align: center" scope="col">Ver Perfil</th>
-                                <th style="text-align: center" scope="col">Modificar</th>
-                                <th style="text-align: center" scope="col">Baja</th></tr>
-                            <tr th:each="user: ${usersByTag}">
-                                <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="green" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                                    </svg></td>
-
-                                <td th:text="${user.name}"></td>
-                                <td th:text="${user.lastName}"></td>
-                                <td><a th:text="${user.mail}" th:href="'mailto:'+${user.mail}"></a></td>
-                                <!--<td th:text="${user.mail}" style="font-style: italic" th:value="${user.mail}"></td>-->
-
-                                <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                                    </svg></td>
-                                <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                    </svg></td>
-                                <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                                    </svg></td>
-                            </tr>
-                        </table>
-
-                        <br><br><a href="/register">Create nuevo Editor</a>
-                    </div>
-
-                </div>
-            </section>
-
-        </main><!-- End #main -->
-<!-- ======= Footer ======= -->
-        <footer id="footer">
-
+        <!-- ======= Breadcrumbs Section ======= -->
+        <section class="breadcrumbs">
             <div class="container">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>Conciencia Politica</span></strong>. Todos los derechos reservados.
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Panel de Administracion</h2>
+                    <ol>
+                        <li><a href="/">Inicio</a></li>
+                        <li>Inner Page</li>
+                    </ol>
                 </div>
-                <div class="credits">
-                    Designed and Powered by <a href="https:/daisansf.com/">daisan solutions</a>
-                </div>
+
             </div>
-        </footer><!-- End Footer -->
+        </section><!-- End Breadcrumbs Section -->
+
+        <section class="inner-page">
+            <div class="container">
+
+                <div>
+                    <table class="table table-striped table table-hover">
+                        <tr>
+                            <th scope="col" style="text-align: center">Estado</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Mail</th>
+                            <th style="text-align: center" scope="col">Ver Perfil</th>
+                            <th style="text-align: center" scope="col">Modificar</th>
+                            <th style="text-align: center" scope="col">Baja</th>
+                        </tr>
+                        <tr th:each="user: ${usersByTag}">
+                            <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16"
+                                    class="bi bi-check-circle-fill" fill="green" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                </svg></td>
+
+                            <td th:text="${user.name}"></td>
+                            <td th:text="${user.lastName}"></td>
+                            <td><a th:text="${user.mail}" th:href="'mailto:'+${user.mail}"></a></td>
+                            <!--<td th:text="${user.mail}" style="font-style: italic" th:value="${user.mail}"></td>-->
+
+                            <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16"
+                                    class="bi bi-info-circle-fill" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                </svg></td>
+                            <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16"
+                                    class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd"
+                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg></td>
+                            <td style="text-align: center"><svg width="1em" height="1em" viewBox="0 0 16 16"
+                                    class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                                </svg></td>
+                        </tr>
+                    </table>
+
+                    <br><br><a href="/register">Create nuevo Editor</a>
+                </div>
+
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Conciencia Politica</span></strong>. Todos los derechos reservados.
+            </div>
+            <div class="credits">
+                Designed and Powered by <a href="https:/daisansf.com/">daisan solutions</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
 
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
