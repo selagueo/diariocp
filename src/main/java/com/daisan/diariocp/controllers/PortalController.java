@@ -136,5 +136,9 @@ public class PortalController {
 
         return "createArticle.html";
     }
-
+    
+    @GetMapping("/test")
+    public String test(){
+       return "test.html";
+    }
 }
