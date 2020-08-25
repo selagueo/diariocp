@@ -51,51 +51,76 @@
 
 
 
-        <!-- ======= Header ======= -->
-        <header id="header">
-            <div class="container">
+    <!-- ======= Header ======= -->
+    <header id="header">
+        <div class="container">
 
-                <div class="logo float-left">
+            <div class="logo float-left">
 
-                    <h1 class="text-light"><a href="/"><img src="/img/logo.jpg" alt="" class="img-fluid"><span> Conciencia Politica</span></a></h1>
+                <h1 class="text-light"><a href="/"><img src="/img/logo.jpg" alt="" class="img-fluid"><span> Conciencia
+                            Politica</span></a></h1>
 
-                </div>
+            </div>
 
-                <nav class="nav-menu float-right d-none d-lg-block">
-                    <ul>
-                        <li><a href="#about">Quienes Somos</a></li>
-                        <li><a href="#team">Equipo</a></li>
-                        <li class="drop-down"><a href="">Categorias</a>
-                            <ul>
-                                <li><a href="#">Argentina</a></li>
-                                <li><a href="#">África</a></li>
-                                <li><a href="#">Asia y Medio Oriente</a></li>
-                                <li><a href="#">Europa</a></li>
-                                <li><a href="#">Estados Unidos</a></li>
-                                <li><a href="#">Latinoamérica</a></li>
-                                <li><a href="#">Historia</a></li>
-                                <li><a href="#">AVISOS</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div th:if="${username != null}" class="drop-down">
-                                <a th:text="'Hola, ' + ${username} + '!' " ></a>
+            <nav class="nav-menu float-right d-none d-lg-block">
+                <ul>
+                    <li><a href="#about">Quienes Somos</a></li>
+                    <li><a href="#team">Equipo</a></li>
+                    <li class="drop-down"><a href="">Categorias</a>
+                        <ul>
+                            <li><a href="#">Argentina</a></li>
+                            <li><a href="#">África</a></li>
+                            <li><a href="#">Asia y Medio Oriente</a></li>
+                            <li><a href="#">Europa</a></li>
+                            <li><a href="#">Estados Unidos</a></li>
+                            <li><a href="#">Latinoamérica</a></li>
+                            <li><a href="#">Historia</a></li>
+                            <li><a href="#">AVISOS</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div th:if="${username != null}">
+                            <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}"
+                                class="drop-down">
+                                <a th:text="'Hola, ' + ${username} + '!' "></a>
+                                <ul>
+                                    <li><a style="text-align: right" href="/profile">Mi Perfil</a></li>
+                                    <li><a style="text-align: right" href="/admin_panel">Panel Administrador</a></li>
+                                    <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
+                                    <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
+                                                viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
+                                                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
+                                            </svg> Cerrar Sesión</a></li>
+                                </ul>
+                            </div>
+                            <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.EDITOR}"
+                                class="drop-down">
+                                <a th:text="'Hola, ' + ${username} + '!' "></a>
                                 <ul>
                                     <li><a style="text-align: right" href="/profile">Mi Perfil</a></li>
                                     <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
-                                    <li><a style="text-align: right" href="#">Cerrar Sesión</a></li>
+                                    <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
+                                                viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
+                                                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
+                                            </svg> Cerrar Sesión</a></li>
                                 </ul>
                             </div>
-                            <div th:unless="${username != null}">
-                                <a href="/login">Iniciar Sesión</a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav><!-- .nav-menu -->
-                
-            </div>
-        </header><!-- End Header -->
+                        </div>
+                        <div th:unless="${username != null}">
+                            <a></a>
+                        </div>
+                    </li>
+                </ul>
+            </nav><!-- .nav-menu -->
 
+        </div>
+    </header><!-- End Header -->
 
 
     <main id="main">
