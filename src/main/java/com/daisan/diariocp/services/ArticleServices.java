@@ -44,7 +44,7 @@ public class ArticleServices {
             Validate(title, synthesis, content, category);
             Article article = new Article();
 
-            if(!photo.isEmpty() && (photo.getContentType() == "image/jpeg" ||photo.getContentType() == "image/png" ))
+            if(!photo.isEmpty() && (photo.getContentType().equalsIgnoreCase("image/jpeg") ||photo.getContentType().equalsIgnoreCase("image/png")  ))
             {
                 try {
                     Photo photoArticle = new Photo();
