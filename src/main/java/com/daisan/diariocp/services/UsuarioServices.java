@@ -22,38 +22,50 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
-public class UsuarioServices implements UserDetailsService{
-    
+public class UsuarioServices implements UserDetailsService {
+
     @Autowired
     private UsuarioRepository userRepo;
-    
+
     //NOTE(tomi): temporal function to add admin users for testing
     @Transactional
-    public void AddAdmin(String name, String lastname, String password, String mail)throws ErrorService{
+    public void AddAdmin(String name, String lastname, String password, String mail) throws ErrorService {
         validate(name, lastname, mail, password);
 
-            Usuario  user = new Usuario();
-            user.setName(name);
-            user.setLastName(lastname);
-            String encripPass = new BCryptPasswordEncoder().encode(password);
-            user.setPassword(encripPass);
-            user.setMail(mail);
-            user.setRegistration(new Date());
-            user.setUsuarioTag(UsuarioTag.ADMIN);
+        Usuario user = new Usuario();
+        user.setName(name);
+        user.setLastName(lastname);
+        String encripPass = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(encripPass);
+        user.setMail(mail);
+        user.setRegistration(new Date());
+        user.setUsuarioTag(UsuarioTag.ADMIN);
 
-            userRepo.save(user);
+        userRepo.save(user);
     }
-    
+
     //NOTE(tomi): this function only add an account if the user is an admin
     @Transactional
-    public void AddUser(String name, String lastname, String password, String mail)throws ErrorService{
+    public void AddUser(String name, String lastname, String password, String mail) throws ErrorService {
         validate(name, lastname, mail, password);
         Usuario myUser = userRepo.GetUserFromMail(mail);
-        if(myUser == null){
+        
+        if (myUser == null) {
+            
             Usuario user = new Usuario();
+            
             user.setName(name);
             user.setLastName(lastname);
-
+            
+            String userName = name + "-" + lastname;
+            
+            Usuario usuarioTest = userRepo.GetUserFromUserName(userName);
+            
+            while(usuarioTest != null){
+                userName = userName + "1";
+                usuarioTest = userRepo.GetUserFromUserName(userName);
+            }
+            
             String encripPass = new BCryptPasswordEncoder().encode(password);
             user.setPassword(encripPass);
 
@@ -62,23 +74,21 @@ public class UsuarioServices implements UserDetailsService{
             user.setUsuarioTag(UsuarioTag.EDITOR);
 
             userRepo.save(user);
-        }
-        else{
+        } else {
             throw new ErrorService("mail already in use!");
         }
     }
-    
-    
-    public List<Usuario> LoadUsuariosByTag(UsuarioTag tag){
-        List<Usuario> usuarios = userRepo.GetUsuarioByUserTag(tag);      
+
+    public List<Usuario> LoadUsuariosByTag(UsuarioTag tag) {
+        List<Usuario> usuarios = userRepo.GetUsuarioByUserTag(tag);
         return usuarios;
     }
-    
-    public Usuario getUsuarioByUsername(String username){
+
+    public Usuario getUsuarioByUsername(String username) {
         Usuario myUser = userRepo.GetUserFromMail(username);
         return myUser;
     }
-    
+
     private void validate(String name, String lastName, String mail, String password) throws ErrorService {
         /*
          This method is for validating name, last name, mail and password; if any of those are not valid, this
@@ -100,25 +110,25 @@ public class UsuarioServices implements UserDetailsService{
         }
     }
 
-   @Override
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario myUser = userRepo.GetUserFromMail(email);
-        if(myUser != null){
+        if (myUser != null) {
 
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
             session.setAttribute("userSession", myUser);
-            
+
             List<GrantedAuthority> perms = new ArrayList<>();
-            
+
             GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_ADMIN");
-            if(myUser.getUsuarioTag() == UsuarioTag.ADMIN){
+            if (myUser.getUsuarioTag() == UsuarioTag.ADMIN) {
                 perms.add(p1);
-            } 
-            
+            }
+
             GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_EDITOR");
             perms.add(p2);
-            
+
             User user = new User(myUser.getMail(), myUser.getPassword(), perms);
             return user;
         }
