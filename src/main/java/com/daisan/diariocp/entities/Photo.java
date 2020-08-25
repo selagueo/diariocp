@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Photo {
@@ -62,5 +63,7 @@ public class Photo {
     public void setContent(byte[] content) {
         this.content = content;
     }
+
+
 
 }

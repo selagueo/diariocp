@@ -10,7 +10,10 @@ import com.daisan.diariocp.repositories.ArticleRepository;
 import com.daisan.diariocp.repositories.PhotoRepository;
 import com.daisan.diariocp.repositories.TagsRepository;
 import com.daisan.diariocp.repositories.UsuarioRepository;
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +44,22 @@ public class ArticleServices {
             Validate(title, synthesis, content);
 
             Article arcticle = new Article();
-            
+      
+            if(!photo.isEmpty())
+            {
+                try {
+                    Photo photoArticle = new Photo();
+                    photoArticle.setContent(photo.getBytes());
+                    photoArticle.setMime(photo.getContentType());
+                    photoArticle.setName(photo.getName());
+                    
+                    photoRepo.save(photoArticle);
+                    arcticle.setPhoto(photoArticle);
+                } catch (IOException ex) {
+                    Logger.getLogger(ArticleServices.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+          
             if(!tags1.isEmpty())
             {
                 String[] tags2 = tags1.split(" ");
