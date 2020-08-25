@@ -74,6 +74,11 @@ public class UsuarioServices implements UserDetailsService{
         return usuarios;
     }
     
+    public Usuario getUsuarioByUsername(String username){
+        Usuario myUser = userRepo.GetUserFromMail(username);
+        return myUser;
+    }
+    
     private void validate(String name, String lastName, String mail, String password) throws ErrorService {
         /*
          This method is for validating name, last name, mail and password; if any of those are not valid, this
