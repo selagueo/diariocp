@@ -72,11 +72,11 @@ public class PortalController {
         return "login.html";
     }
 
-//    @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
-//    @GetMapping("/profile")
-//    public String profile() {
-//        return "profile.html";
-//    }
+    @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
+    @GetMapping("/profile")
+    public String profile() {
+        return "/profile.html";
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/admin_panel")
