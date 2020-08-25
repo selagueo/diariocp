@@ -50,6 +50,7 @@
     </div>
   </section>
 
+
         <!-- ======= Header ======= -->
         <header id="header">
           <div class="container">
@@ -76,12 +77,12 @@
                               <li><a href="#">AVISOS</a></li>
                           </ul>
                       </li>
-                      <li th:switch="${username}">
+                      <li>
                           <div th:if="${username != null}" class="drop-down">
                               <a th:text="'Hola, ' + ${username} + '!' " ></a>
                               <ul>
                                   <li><a style="text-align: right" href="/profile">Mi Perfil</a></li>
-                                  <li><a style="text-align: right" href="#">Crear Noticia</a></li>
+                                  <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
                                   <li><a style="text-align: right" href="#">Cerrar Sesión</a></li>
                               </ul>
                           </div>
@@ -94,6 +95,7 @@
               
           </div>
       </header><!-- End Header -->
+
 
 
   <main id="main">
