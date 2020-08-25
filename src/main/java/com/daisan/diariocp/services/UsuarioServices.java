@@ -51,7 +51,8 @@ public class UsuarioServices implements UserDetailsService {
         Usuario user = userRepo.GetUserFromMail(mail);
         
         if (user == null) {        
-            String userName = name + lastname;   
+            String userName = name + lastname;
+            userName = userName.toLowerCase();
             Usuario usuarioTest = userRepo.GetUserFromUserName(userName);
             String newUserName = userName;
             int i = 1;
@@ -64,7 +65,7 @@ public class UsuarioServices implements UserDetailsService {
             usuarioTest = new Usuario();
             usuarioTest.setName(name);
             usuarioTest.setLastName(lastname);
-            usuarioTest.setUserName(userName.toLowerCase());
+            usuarioTest.setUserName(userName);
                         
             String encripPass = new BCryptPasswordEncoder().encode(password);
             usuarioTest.setPassword(encripPass);
