@@ -52,7 +52,7 @@ public class PortalController {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
         Usuario usuarioS = (Usuario)session.getAttribute("userSession");
-        
+        modelo.addAttribute("inner", "Ultimas Noticias");
         if (user != null) {
             Usuario usuario = userService.getUsuarioByUsername(user);
             if (usuario != null) {
@@ -68,6 +68,8 @@ public class PortalController {
                 return "profile.html";
             }
         }
+        
+        
         return "index.html";
     }
 
