@@ -181,4 +181,10 @@ public class PortalController {
     public String test(){
        return "test.html";
     }
+    
+    @GetMapping("/equipo")
+    public String equipo(Model modelo){
+        modelo.addAttribute("inner", "Equipo de Conciencia Politica");
+       return "equipo.html";
+    }
 }
