@@ -27,6 +27,9 @@ public class Usuario {
     private String password;
     private String name;
     private String lastName;
+    private String ulrInstagram = null;
+    private String ulrLinkedin = null;
+    private String ulrTwitter = null;
     
     @Enumerated(EnumType.STRING)
     private UsuarioTag usuarioTag;
@@ -46,6 +49,30 @@ public class Usuario {
 
     //Getters and Setters:
 
+    public String getUlrInstagram() {
+        return ulrInstagram;
+    }
+
+    public void setUlrInstagram(String ulrInstagram) {
+        this.ulrInstagram = ulrInstagram;
+    }
+
+    public String getUlrLinkedin() {
+        return ulrLinkedin;
+    }
+
+    public void setUlrLinkedin(String ulrLinkedin) {
+        this.ulrLinkedin = ulrLinkedin;
+    }
+
+    public String getUlrTwitter() {
+        return ulrTwitter;
+    }
+
+    public void setUlrTwitter(String ulrTwitter) {
+        this.ulrTwitter = ulrTwitter;
+    }
+    
     public String getUserName() {
         return userName;
     }
