@@ -2,7 +2,57 @@
 <div th:fragment="footertop">
     <!-- ======= Footer ======= -->
     <footer id="footer">
-        <div class="footer-top">
+        <div class="footer-top" th:if="${color != null}" th:style="'background-color:'+${color}+'; color:white; opacity:1'">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h3>Conciencia Politica</h3>
+                        <p>
+                            UCA - Av. Alicia Moreau de Justo 1300 <br>
+                            C1107 AAZ, Buenos Aires<br><br>
+                            <strong>Telefono:</strong> +54 291 572-1221<br>
+                            <strong>Correo:</strong> concienciapolitica.uca@gmail.com<br>
+                        </p>
+                        <div class="social-links mt-3">
+                            <a href="https:/twitter.com/_concienciapol" class="twitter"><i
+                                    class="bx bxl-twitter"></i></a>
+                            <a href="https:/instagram.com/conciencia.politica" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Suscribite a nuestro Newsletter</h4>
+                        <p>Recibi todas las semanas las ultimas noticias a tu correo</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Suscribirse">
+                        </form>
+                        <p> </p>
+                        <div th:if="${session.userSession != null}">
+                            <a></a>
+                        </div>
+                        <div th:unless="${session.userSession != null}">
+                            <h4 style="text-align: right"></h4>
+                            <h4 style="text-align: right">¿Sos un editor? <a style="text-align: right"
+                                    href="/login">Iniciar
+                                    Sesión</a></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    
+        <footer id="footer">
+        <div class="footer-top" th:if="${color == null}">
             <div class="container">
                 <div class="row">
 
