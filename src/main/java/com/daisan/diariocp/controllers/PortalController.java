@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 
 @Controller
 @RequestMapping("/")
@@ -172,6 +173,7 @@ public class PortalController {
         model.addAttribute("articles", articleRepo.GetPostFromCategory(articleService.searchCategory(category)));
         model.addAttribute("images", photos);
         model.addAttribute("imageMine", photosMime);
+        model.addAttribute("inner", "Noticias de " + StringUtils.capitalize(category.toLowerCase()));
 
         return "showArticleFromCategory.html";
         
