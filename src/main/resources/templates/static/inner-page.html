@@ -1,10 +1,10 @@
 <html lang="en" xmlns:th="http:/www.thymeleaf.org">
 <div th:fragment="inner-page">
     <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
+    <section class="breadcrumbs" th:if="${color != null}" th:style="'background-color:'+${color}">
         <div class="container">
   
-          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
             <h2 th:if="${inner  != null}" th:text="${inner}">Inner Page</h2>
             <h2 th:if="${session.userSession  != null && inner == null}" th:text="'Perfil de ' + ${session.userSession.name}+ ' ' + ${session.userSession.lastName}">Inner Page</h2>
             <ol>
@@ -15,6 +15,22 @@
           </div>
   
         </div>
-    </section><!-- End Breadcrumbs Section -->
+    </section>
+    
+    <section class="breadcrumbs" th:if="${color == null}">
+        <div class="container">
+  
+            <div class="d-flex justify-content-between align-items-center">
+            <h2 th:if="${inner  != null}" th:text="${inner}">Inner Page</h2>
+            <h2 th:if="${session.userSession  != null && inner == null}" th:text="'Perfil de ' + ${session.userSession.name}+ ' ' + ${session.userSession.lastName}">Inner Page</h2>
+            <ol>
+              <li><a href="/">Inicio</a></li>
+              <li th:if="${inner} != null" th:text="${inner}"></li>
+              <li th:if="${session.userSession  != null && inner == null}" th:text="'Perfil de ' + ${session.userSession.name}+ ' ' + ${session.userSession.lastName}"></li>
+            </ol>
+          </div>
+  
+        </div>
+    </section>
 </div>
 </html>

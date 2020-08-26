@@ -170,10 +170,49 @@ public class PortalController {
             photosMime.add(article.getPhoto().getMime());
         }
         
+        String desCategory = null;
+        String colorCategory = null;
+        switch(category.toLowerCase()){
+            case "argentina":{
+                desCategory = "Argentina";
+                colorCategory = "#20403D";
+            }break;
+            case "africa":{
+                desCategory = "AFRICA";
+                colorCategory = "#8E501D";
+            }break;
+            case "asia":{
+                desCategory = "ASIA Y MEDIO ORIENTE";
+                colorCategory = "#541313";
+            }break;
+            case "europa":{
+                desCategory = "EUROPA";
+                colorCategory = "#346B4E";
+            }break;
+            case "eeuu":{
+                desCategory = "ESTADOS UNIDOS";
+                colorCategory = "#565C7E";
+            }break;
+            case "latinoamerica":{
+                desCategory = "LATINOAMERICA";
+                colorCategory = "#452E5A";
+            }break;
+            case "historia":{
+                desCategory = "HISTORIA";
+                colorCategory = "#9E984F";
+            }break;
+            case "uca":{
+                desCategory = "AVISOS";
+                colorCategory = "#402C07";
+            }break;
+            
+        }
+        
         model.addAttribute("articles", articleRepo.GetPostFromCategory(articleService.searchCategory(category)));
         model.addAttribute("images", photos);
         model.addAttribute("imageMine", photosMime);
-        model.addAttribute("inner", "Noticias de " + StringUtils.capitalize(category.toLowerCase()));
+        model.addAttribute("inner", desCategory);
+        model.addAttribute("color", colorCategory);
 
         return "showArticleFromCategory.html";
         
