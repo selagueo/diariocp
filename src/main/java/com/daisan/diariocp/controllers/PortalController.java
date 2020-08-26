@@ -1,15 +1,24 @@
 package com.daisan.diariocp.controllers;
 
+import com.daisan.diariocp.entities.Article;
+import com.daisan.diariocp.entities.Photo;
 import com.daisan.diariocp.entities.Usuario;
 
 import com.daisan.diariocp.enums.UsuarioTag;
 
 import com.daisan.diariocp.errors.ErrorService;
+import com.daisan.diariocp.repositories.ArticleRepository;
 import com.daisan.diariocp.services.ArticleServices;
+import com.daisan.diariocp.services.PhotoServices;
 import com.daisan.diariocp.services.UsuarioServices;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +38,10 @@ public class PortalController {
     private UsuarioServices userService;
     @Autowired
     private ArticleServices articleService;
+    @Autowired
+    private ArticleRepository articleRepo;
+    @Autowired
+    private PhotoServices photoService;
 
     @GetMapping({"/", "{user}"})
     public String userProfile(Model modelo, @PathVariable(required = false) String user) throws ErrorService{
@@ -124,6 +137,8 @@ public class PortalController {
     public String addArticle(@RequestParam String title, @RequestParam String synthesis,
             @RequestParam String content, @RequestParam String tags,
             @RequestParam MultipartFile photo, @RequestParam String category) {
+        
+        String imgName = photo.getOriginalFilename();
 
         try {
             articleService.AddPost(title, synthesis, content, tags, photo, category);
@@ -133,6 +148,33 @@ public class PortalController {
         }
 
         return "createArticle.html";
+    }
+    
+    @GetMapping("/showArticleFromCategory")
+    public String showArticleFromCategory(Model model, @RequestParam String category) throws UnsupportedEncodingException{
+        
+        List<String> photos = new ArrayList();
+        List<String> photosMime = new ArrayList();
+       
+        for(Article article : articleRepo.GetPostFromCategory(articleService.searchCategory(category)))
+        {
+            Optional<Photo> tempPhoto = photoService.getFile(article.getPhoto().getId());
+            if(tempPhoto.isPresent())
+            {
+                Photo photo = tempPhoto.get();
+                byte[] encodeBase64 = Base64.encode(photo.getContent());
+                String base64Encoded = new String(encodeBase64, "UTF-8");
+                photos.add(base64Encoded);
+            }
+            photosMime.add(article.getPhoto().getMime());
+        }
+        
+        model.addAttribute("articles", articleRepo.GetPostFromCategory(articleService.searchCategory(category)));
+        model.addAttribute("images", photos);
+        model.addAttribute("imageMine", photosMime);
+
+        return "showArticleFromCategory.html";
+        
     }
     
     @GetMapping("/test")

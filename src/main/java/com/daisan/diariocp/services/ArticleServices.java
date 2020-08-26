@@ -32,6 +32,8 @@ public class ArticleServices {
     private TagsRepository tagsRepo;
     @Autowired
     private PhotoRepository photoRepo;
+    @Autowired
+    private PhotoServices photoService;
     
     @Transactional
     public void AddPost(String title, String synthesis, String content, String tags1, MultipartFile photo, String category) throws ErrorService{
@@ -49,17 +51,7 @@ public class ArticleServices {
                                     photo.getContentType().equalsIgnoreCase("image/bmp")  ||
                                     photo.getContentType().equalsIgnoreCase("image/png")))
             {
-                try {
-                    Photo photoArticle = new Photo();
-                    photoArticle.setContent(photo.getBytes());
-                    photoArticle.setMime(photo.getContentType());
-                    photoArticle.setName(photo.getName());
-                    
-                    photoRepo.save(photoArticle);
-                    article.setPhoto(photoArticle);
-                } catch (IOException ex) {
-                    Logger.getLogger(ArticleServices.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    article.setPhoto(photoService.save(photo));
             }
             else
             {
@@ -117,7 +109,7 @@ public class ArticleServices {
 
     }
     
-    private Category searchCategory(String categoty)
+    public Category searchCategory(String categoty)
     {
         switch (categoty)
         {

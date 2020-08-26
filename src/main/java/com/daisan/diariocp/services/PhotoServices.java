@@ -3,6 +3,7 @@ package com.daisan.diariocp.services;
 import com.daisan.diariocp.entities.Photo;
 import com.daisan.diariocp.errors.ErrorService;
 import com.daisan.diariocp.repositories.PhotoRepository;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +18,17 @@ public class PhotoServices{
 
     @Transactional
     public Photo save(MultipartFile file) throws ErrorService {
-        if (file != null) {
-            try {
-                Photo photo = new Photo();
-                photo.setMime(file.getContentType());
-                photo.setName(file.getName());
-                photo.setContent(file.getBytes());
-
-                return photoRepository.save(photo);
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
+        String photoName = file.getOriginalFilename();
+        try{
+            Photo photo = new Photo();
+            photo.setName(photoName);
+            photo.setMime(file.getContentType());
+            photo.setContent(file.getBytes());
+            return photoRepository.save(photo);
+        }
+        catch(Exception e)
+        {
+             e.printStackTrace();
         }
         return null;
     }
@@ -53,5 +54,14 @@ public class PhotoServices{
             }
         }
         return null;
+    }
+    
+    public Optional<Photo> getFile(String id){
+        return photoRepository.findById(id);
+    }
+    
+    public List<Photo> getFiles()
+    {
+        return photoRepository.findAll();
     }
 }
