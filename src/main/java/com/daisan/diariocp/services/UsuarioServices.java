@@ -29,8 +29,8 @@ public class UsuarioServices implements UserDetailsService {
 
     //NOTE(tomi): temporal function to add admin users for testing
     @Transactional
-    public void AddAdmin(String username, String name, String lastname, String password, String mail) throws ErrorService {
-        validate(name, lastname, mail, password);
+    public void AddAdmin(String username, String name, String lastname, String password, String password2, String mail) throws ErrorService {
+        validate(name, lastname, mail, password, password2);
 
         Usuario user = new Usuario();
         user.setName(name);
@@ -47,38 +47,32 @@ public class UsuarioServices implements UserDetailsService {
 
     //NOTE(tomi): this function only add an account if the user is an admin
     @Transactional
-    public void AddUser(String name, String lastname, String password, String mail) throws ErrorService {
-        validate(name, lastname, mail, password);
-        Usuario user = userRepo.GetUserFromMail(mail);
-        
-        if (user == null) {        
-            String userName = name + lastname;
-            userName = userName.toLowerCase();
-            Usuario usuarioTest = userRepo.GetUserFromUserName(userName);
-            String newUserName = userName;
-            int i = 1;
-            while(usuarioTest != null){
-                newUserName = userName + i;
-                usuarioTest = userRepo.GetUserFromUserName(newUserName);
-                i++;
-            }
-            userName = newUserName;
-            usuarioTest = new Usuario();
-            usuarioTest.setName(name);
-            usuarioTest.setLastName(lastname);
-            usuarioTest.setUserName(userName);
-                        
-            String encripPass = new BCryptPasswordEncoder().encode(password);
-            usuarioTest.setPassword(encripPass);
-
-            usuarioTest.setMail(mail);
-            usuarioTest.setRegistration(new Date());
-            usuarioTest.setUsuarioTag(UsuarioTag.EDITOR);
-
-            userRepo.save(usuarioTest);
-        } else {     
-            throw new ErrorService("mail already in use!");
+    public void AddUser(String name, String lastname, String password, String password2, String mail) throws ErrorService {
+        validate(name, lastname, mail, password, password2);
+        String userName = name + lastname;
+        userName = userName.toLowerCase();
+        Usuario usuarioTest = userRepo.GetUserFromUserName(userName);
+        String newUserName = userName;
+        int i = 1;
+        while(usuarioTest != null){
+            newUserName = userName + i;
+            usuarioTest = userRepo.GetUserFromUserName(newUserName);
+            i++;
         }
+        userName = newUserName;
+        usuarioTest = new Usuario();
+        usuarioTest.setName(name);
+        usuarioTest.setLastName(lastname);
+        usuarioTest.setUserName(userName);
+
+        String encripPass = new BCryptPasswordEncoder().encode(password);
+        usuarioTest.setPassword(encripPass);
+
+        usuarioTest.setMail(mail);
+        usuarioTest.setRegistration(new Date());
+        usuarioTest.setUsuarioTag(UsuarioTag.EDITOR);
+
+        userRepo.save(usuarioTest);
     }
 
     public List<Usuario> LoadUsuariosByTag(UsuarioTag tag) {
@@ -91,24 +85,30 @@ public class UsuarioServices implements UserDetailsService {
         return myUser;
     }
 
-    private void validate(String name, String lastName, String mail, String password) throws ErrorService {
+    private void validate(String name, String lastName, String mail, String password, String password2) throws ErrorService {
         /*
          This method is for validating name, last name, mail and password; if any of those are not valid, this
          will throw an exception.
          */
         if (name == null || name.isEmpty()) {
-            throw new ErrorService("The NAME field can't be null/empty.");
+            throw new ErrorService("El nombre no puede quedar vacio");
         }
 
         if (lastName == null || lastName.isEmpty()) {
-            throw new ErrorService("The LASTNAME field can't be null/empty.");
+            throw new ErrorService("El apellido no puede quedar vacio");
         }
 
         if (mail == null || mail.isEmpty()) {
-            throw new ErrorService("The MAIL field can't be null/empty.");
+            throw new ErrorService("El mail no puede quedar vacio");
         }
         if (password == null || password.isEmpty() || password.length() <= 6) {
-            throw new ErrorService("The PASSWORD field can't be null/empty, and must have 6 or more characters.");
+            throw new ErrorService("La contrasena debe tener mas de 7 caracteres");
+        }
+        if(userRepo.GetUserFromMail(mail) != null){
+            throw new ErrorService("Ese mail ya se encuentra registrado");
+        }
+        if(!password.equals(password2)){
+            throw new ErrorService("Las contasenas deben ser iguales");
         }
     }
 

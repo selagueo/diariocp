@@ -8,6 +8,7 @@ import com.daisan.diariocp.enums.UsuarioTag;
 
 import com.daisan.diariocp.errors.ErrorService;
 import com.daisan.diariocp.repositories.ArticleRepository;
+import com.daisan.diariocp.repositories.UsuarioRepository;
 import com.daisan.diariocp.services.ArticleServices;
 import com.daisan.diariocp.services.PhotoServices;
 import com.daisan.diariocp.services.UsuarioServices;
@@ -29,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.util.StringUtils;
 
 @Controller
 @RequestMapping("/")
@@ -45,7 +45,7 @@ public class PortalController {
     private PhotoServices photoService;
 
     @GetMapping({"/", "{user}"})
-    public String userProfile(Model modelo, @PathVariable(required = false) String user) throws ErrorService{
+    public String userProfileAndIndex(Model modelo, @PathVariable(required = false) String user) throws ErrorService{
         //CREAR Admin
         //userService.AddAdmin("admin","Admin", "Istrador", "1234567", "admin@daisansf.com");
         
@@ -117,17 +117,13 @@ public class PortalController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/adduser")
-    public String adduser(@RequestParam String name, @RequestParam String lastName, @RequestParam String email, @RequestParam String password1, @RequestParam String password2) {
-        if (password1.equals(password2)) {
-            try {
-                userService.AddUser(name, lastName, password1, email);
-            } catch (ErrorService ex) {
-                System.out.println(ex.getMessage());
-            }
-        } else {
-            System.out.println("passwords must be equals!");
+    public String adduser(Model modelo, @RequestParam String name, @RequestParam String lastName, @RequestParam String email, @RequestParam String password1, @RequestParam String password2) {
+        try {
+            userService.AddUser(name, lastName, password1, password2, email);
+        } catch (ErrorService ex) {
+            modelo.addAttribute("errorDatos", ex.getMessage());
+            return "register.html";
         }
-
         return "register_success.html";
     }
 
