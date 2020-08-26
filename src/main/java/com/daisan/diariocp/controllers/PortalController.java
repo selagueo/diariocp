@@ -175,35 +175,35 @@ public class PortalController {
         switch(category.toLowerCase()){
             case "argentina":{
                 desCategory = "Argentina";
-                colorCategory = "#20403D";
+                colorCategory = "#087589";
             }break;
             case "africa":{
                 desCategory = "AFRICA";
-                colorCategory = "#8E501D";
+                colorCategory = "#A6570C";
             }break;
             case "asia":{
                 desCategory = "ASIA Y MEDIO ORIENTE";
-                colorCategory = "#541313";
+                colorCategory = "#54100D";
             }break;
             case "europa":{
                 desCategory = "EUROPA";
-                colorCategory = "#346B4E";
+                colorCategory = "#0F5A15";
             }break;
             case "eeuu":{
                 desCategory = "ESTADOS UNIDOS";
-                colorCategory = "#565C7E";
+                colorCategory = "#091851";
             }break;
             case "latinoamerica":{
                 desCategory = "LATINOAMERICA";
-                colorCategory = "#452E5A";
+                colorCategory = "#480072";
             }break;
             case "historia":{
                 desCategory = "HISTORIA";
-                colorCategory = "#9E984F";
+                colorCategory = "#000000";
             }break;
             case "uca":{
                 desCategory = "AVISOS";
-                colorCategory = "#402C07";
+                colorCategory = "#484B44";
             }break;
             
         }
