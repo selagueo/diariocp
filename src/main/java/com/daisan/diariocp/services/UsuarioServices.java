@@ -29,7 +29,7 @@ public class UsuarioServices implements UserDetailsService {
 
     //NOTE(tomi): temporal function to add admin users for testing
     @Transactional
-    public void AddAdmin(String name, String lastname, String password, String mail) throws ErrorService {
+    public void AddAdmin(String username, String name, String lastname, String password, String mail) throws ErrorService {
         validate(name, lastname, mail, password);
 
         Usuario user = new Usuario();
@@ -40,6 +40,7 @@ public class UsuarioServices implements UserDetailsService {
         user.setMail(mail);
         user.setRegistration(new Date());
         user.setUsuarioTag(UsuarioTag.ADMIN);
+        user.setUserName(username);
 
         userRepo.save(user);
     }
@@ -86,7 +87,7 @@ public class UsuarioServices implements UserDetailsService {
     }
 
     public Usuario getUsuarioByUsername(String username) {
-        Usuario myUser = userRepo.GetUserFromMail(username);
+        Usuario myUser = userRepo.GetUserFromUserName(username);
         return myUser;
     }
 
