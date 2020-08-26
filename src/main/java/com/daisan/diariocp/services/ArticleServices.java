@@ -113,14 +113,14 @@ public class ArticleServices {
     {
         switch (categoty)
         {
-            case "Argentina": return Category.ARGENTINA;
-            case "Asia y Medio Oriente": return Category.ASIA;
-            case "África": return Category.AFRICA;
-            case "Estados Unidos": return Category.EEUU;
-            case "Europa": return Category.EUROPA;
-            case "Historia": return Category.HISTORIA;
-            case "Latinoamérica": return Category.LATINOAMERICA;
-            case "Avisos": return Category.UCA;
+            case "ARGENTINA": return Category.ARGENTINA;
+            case "ASIA": return Category.ASIA;
+            case "AFRICA": return Category.AFRICA;
+            case "EEUU": return Category.EEUU;
+            case "EUROPA": return Category.EUROPA;
+            case "HISTORIA": return Category.HISTORIA;
+            case "LATINOAMERICA": return Category.LATINOAMERICA;
+            case "UCA": return Category.UCA;
             default : return null;
         }
     }
