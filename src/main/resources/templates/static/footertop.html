@@ -1,8 +1,8 @@
 <html lang="en" xmlns:th="http:/www.thymeleaf.org">
 <div th:fragment="footertop">
     <!-- ======= Footer ======= -->
-    <footer id="footer">
-        <div class="footer-top" th:if="${color != null}" th:style="'background-color:'+${color}+'; color:white; opacity:1'">
+    <footer id="footer" th:if="${color != null}">
+        <div class="footer-top" th:style="'background-color:'+${color}+'; color:white; opacity:1'">
             <div class="container">
                 <div class="row">
 
@@ -51,8 +51,8 @@
         </div>
     </footer><!-- End Footer -->
     
-        <footer id="footer">
-        <div class="footer-top" th:if="${color == null}">
+    <footer id="footer" th:if="${color == null}">
+        <div class="footer-top">
             <div class="container">
                 <div class="row">
 
