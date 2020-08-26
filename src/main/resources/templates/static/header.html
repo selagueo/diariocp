@@ -33,7 +33,7 @@
                 <ul>
                     <li><a href="#about">Quienes Somos</a></li>
                     <li><a href="#team">Equipo</a></li>
-                    <li class="drop-down"><a href="">Categorias</a>
+                    <li class="drop-down"><a href="#news">Categorias</a>
                         <ul>
                             <li>
                                 <form action="/showArticleFromCategory" method="get">
@@ -79,7 +79,7 @@
                                 class="drop-down">
                                 <a th:text="'Hola, ' + ${session.userSession.name} + '!' "></a>
                                 <ul>
-                                    <li><a style="text-align: right" th:href="@{/{user}(user=${session.userSession.mail})}">Mi Perfil</a></li>
+                                    <li><a style="text-align: right" th:href="@{/{user}(user=${session.userSession.userName})}">Mi Perfil</a></li>
                                     <li><a style="text-align: right" href="/admin_panel">Panel Administrador</a></li>
                                     <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
                                     <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
@@ -95,7 +95,7 @@
                                 class="drop-down">
                                 <a th:text="'Hola, ' + ${session.userSession.name} + '!' "></a>
                                 <ul>
-                                    <li><a style="text-align: right" th:href="@{/{user}(user=${session.userSession.mail})}">Mi Perfil</a></li>
+                                    <li><a style="text-align: right" th:href="@{/{user}(user=${session.userSession.userName})}">Mi Perfil</a></li>
                                     <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
                                     <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
                                                 viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
