@@ -40,36 +40,42 @@ div.section-title.derecha p{
 }
 @supports(object-fit: cover){
     img.img-fluid.especial{
-        min-height: 255px;
+        height: 255px;
         object-fit: cover;
         object-position: center center;
     }
 }
 
 @media (max-width: 1199px) {
+    @supports(object-fit: cover){
     img.img-fluid.especial{
-        min-height: 289.98px;
+        height: 289.98px;
         object-fit: cover;
         object-position: center center;
     }    
+    }
     
 }
 
 @media (max-width: 991px) {
+    @supports(object-fit: cover){
     img.img-fluid.especial{
-        min-height: 330px;
+        height: 330px;
         object-fit: cover;
         object-position: center center;
-    }    
+    }  
+    }
     
 }
 
 @media (max-width: 767px) {
+    @supports(object-fit: cover){
     img.img-fluid.especial{
-        min-height: 510px;
+        height: 510px;
         object-fit: cover;
         object-position: center center;
-    }    
+    }  
+    }
     
 }
 
