@@ -1,92 +1,106 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http:/www.thymeleaf.org">
 
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Conciencia Politica</title>
-    <meta content="" name="descriptison">
-    <meta content="" name="keywords">
+        <title>Conciencia Politica</title>
+        <meta content="" name="descriptison">
+        <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <link href="/img/logo.jpg" rel="icon">
-    <link href="/img/logo.jpg" rel="apple-touch-icon">
+        <!-- Favicons -->
+        <link href="/img/logo.jpg" rel="icon">
+        <link href="/img/logo.jpg" rel="apple-touch-icon">
 
-    <!-- Google Fonts -->
-    <link
-        href="https:/fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
-        rel="stylesheet">
+        <!-- Google Fonts -->
+        <link
+            href="https:/fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
+            rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/vendor/owl.carousel/owl.carousel.min.css" rel="stylesheet">
-    <link href="/vendor/aos/aos.css" rel="stylesheet">
+        <!-- Vendor CSS Files -->
+        <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/vendor/icofont/icofont.min.css" rel="stylesheet">
+        <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
+        <link href="/vendor/venobox/venobox.css" rel="stylesheet">
+        <link href="/vendor/owl.carousel/owl.carousel.min.css" rel="stylesheet">
+        <link href="/vendor/aos/aos.css" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link href="/css/style.css" rel="stylesheet">
-</head>
-
-
-
-<body>
+        <!-- Template Main CSS File -->
+        <link href="/css/style.css" rel="stylesheet">
+    </head>
 
 
-<div th:insert="static/header :: header"></div>
-<div th:insert="static/inner-page :: inner-page"></div>
+
+    <body>
 
 
-    <main id="main">
-        <section class="inner-page">
-            <div class="container">
-
-                <div>
-                    <table class="table table-striped table table-hover">
+        <div th:insert="static/header :: header"></div>
+        <div th:insert="static/inner-page :: inner-page"></div>
 
 
-                        <tr th:each="article,iter : ${articles}">
-                            <p th:text="${articles[iter.index].title}"></p>
-                            <p th:text="${articles[iter.index].synthesis}"></p>
-                            <p th:text="${articles[iter.index].content}"></p>
-                            <img th:src="'data:' + ${imageMine[iter.index]} + ';base64,' + ${images[iter.index]}" />
-                        </tr>
-                                       
-                    
-                    </table>
+        <main id="main">
+            <section class="inner-page">
+                <div class="container">
 
-       
+                    <div>
+                        <table class="table table-striped table table-hover">
+
+
+
+                            <tr th:each="article,iter : ${articles}">
+
+                            <section id="about" class="about">
+                            <div class="container">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-4 video-box">
+                                        <img th:src="'data:' + ${imageMine[iter.index]} + ';base64,' + ${images[iter.index]}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="col-lg-8 d-flex flex-column justify-content">
+                                            <div class="section-title">
+                                                <h4 th:text="${articles[iter.index].title}"></h4>
+                                            </div>
+                                                <p th:text="${articles[iter.index].synthesis}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            </section>
+
+                            </tr>
+
+
+                        </table>
+
+
+                    </div>
+
                 </div>
+            </section>
 
-            </div>
-        </section>
+        </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+        <div th:insert="static/footertop :: footertop"></div>
+        <div th:insert="static/footer :: footer"></div>
 
-    </main><!-- End #main -->
-    <!-- ======= Footer ======= -->
-    <div th:insert="static/footertop :: footertop"></div>
-    <div th:insert="static/footer :: footer"></div>
+        <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
-    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+        <!-- Vendor JS Files -->
+        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/vendor/jquery.easing/jquery.easing.min.js"></script>
+        <script src="/vendor/php-email-form/validate.js"></script>
+        <script src="/vendor/jquery-sticky/jquery.sticky.js"></script>
+        <script src="/vendor/venobox/venobox.min.js"></script>
+        <script src="/vendor/waypoints/jquery.waypoints.min.js"></script>
+        <script src="/vendor/counterup/counterup.min.js"></script>
+        <script src="/vendor/owl.carousel/owl.carousel.min.js"></script>
+        <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="/vendor/aos/aos.js"></script>
 
-    <!-- Vendor JS Files -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/vendor/jquery.easing/jquery.easing.min.js"></script>
-    <script src="/vendor/php-email-form/validate.js"></script>
-    <script src="/vendor/jquery-sticky/jquery.sticky.js"></script>
-    <script src="/vendor/venobox/venobox.min.js"></script>
-    <script src="/vendor/waypoints/jquery.waypoints.min.js"></script>
-    <script src="/vendor/counterup/counterup.min.js"></script>
-    <script src="/vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="/vendor/aos/aos.js"></script>
+        <!-- Template Main JS File -->
+        <script src="/js/main.js"></script>
 
-    <!-- Template Main JS File -->
-    <script src="/js/main.js"></script>
-
-</body>
+    </body>
 
 </html>
