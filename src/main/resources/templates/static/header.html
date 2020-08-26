@@ -3,115 +3,119 @@
 
     <body>
 
-        <!-- ======= Top Bar ======= -->
-        <section id="topbar" class="d-none d-lg-block">
-            <div class="container clearfix">
-                <div class="contact-info float-left">
-                    <i class="icofont-envelope"></i><a
-                        href="mailto:concienciapolitica.uca@gmail.com">concienciapolitica.uca@gmail.com</a>
-                    <i class="icofont-phone"></i> +54 291 572-1221
-                </div>
-                <div class="social-links float-right">
-                    <a href="https:/instagram.com/conciencia.politica" class="instagram"><i
-                            class="icofont-instagram"></i></a>
-                    <a href="https:/twitter.com/_concienciapol" class="twitter"><i class="icofont-twitter"></i></a>
-                </div>
+    <!-- ======= Top Bar ======= -->
+    <section id="topbar" class="d-none d-lg-block">
+        <div class="container clearfix">
+            <div class="contact-info float-left">
+                <i class="icofont-envelope"></i><a
+                    href="mailto:concienciapolitica.uca@gmail.com">concienciapolitica.uca@gmail.com</a>
+                <i class="icofont-phone"></i> +54 291 572-1221
             </div>
-        </section>
+            <div class="social-links float-right">
+                <a href="https:/instagram.com/conciencia.politica" class="instagram"><i
+                        class="icofont-instagram"></i></a>
+                <a href="https:/twitter.com/_concienciapol" class="twitter"><i class="icofont-twitter"></i></a>
+            </div>
+        </div>
+    </section>
 
-        <!-- ======= Header ======= -->
-        <header id="header">
-            <div class="container">
+    <!-- ======= Header ======= -->
+    <header id="header">
+        <div class="container">
 
-                <div class="logo float-left">
+            <div class="logo float-left">
 
-                    <h1 class="text-light"><a href="/"><img src="/img/logo.jpg" alt="" class="img-fluid"><span>
-                                Conciencia
-                                Politica</span></a></h1>
-
-                </div>
-
-                <nav class="nav-menu float-right d-none d-lg-block">
-                    <ul>
-                        <li><a href="#about">Quienes Somos</a></li>
-                        <li><a href="#team">Equipo</a></li>
-                        <li class="drop-down"><a href="#news">Categorias</a>
-                            <ul>
-                                <li>
-                                    <a href="/showArticleFromCategory?category=ARGENTINA">Argentina</a>
-                                </li>
-                                <li>
-                                    <a href="/showArticleFromCategory?category=AFRICA">África</a>
-                                </li>
-                                <li>
-                                    <a href="/showArticleFromCategory?category=ASIA">Asia y Medio
-                                        Oriente</a>
-                                </li>
-                                <li>
-                                    <a href="/showArticleFromCategory?category=EUROPA">Europa</a>
-                                </li>
-                                <li>
-                                    <a href="/showArticleFromCategory?category=EEUU">Estados Unidos</a>
-                                </li>
-                                <li>
-                                    <a href="/showArticleFromCategory?category=LATINOAMERICA">Latinoamérica</a>
-                                </li>
-                                <li>
-                                    <a href="/showArticleFromCategory?category=HISTORIA">Historia</a>
-                                </li>
-                                <li>
-                                    <a href="/showArticleFromCategory?category=UCA">Avisos</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <div th:if="${session.userSession != null}">
-                                <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}"
-                                    class="drop-down">
-                                    <a th:text="'Hola, ' + ${session.userSession.name} + '!' "></a>
-                                    <ul>
-                                        <li><a style="text-align: right"
-                                                th:href="@{/{user}(user=${session.userSession.userName})}">Mi Perfil</a>
-                                        </li>
-                                        <li><a style="text-align: right" href="/admin_panel">Panel Administrador</a>
-                                        </li>
-                                        <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
-                                        <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
-                                                    viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
-                                                    <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
-                                                </svg> Cerrar Sesión</a></li>
-                                    </ul>
-                                </div>
-                                <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.EDITOR}"
-                                    class="drop-down">
-                                    <a th:text="'Hola, ' + ${session.userSession.name} + '!' "></a>
-                                    <ul>
-                                        <li><a style="text-align: right"
-                                                th:href="@{/{user}(user=${session.userSession.userName})}">Mi Perfil</a>
-                                        </li>
-                                        <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
-                                        <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
-                                                    viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
-                                                    <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
-                                                </svg> Cerrar Sesión</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div th:unless="${session.userSession != null}">
-                                <a></a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav><!-- .nav-menu -->
+                <h1 class="text-light"><a href="/"><img src="/img/logo.jpg" alt="" class="img-fluid"><span> Conciencia
+                            Politica</span></a></h1>
 
             </div>
-        </header>
+
+            <nav class="nav-menu float-right d-none d-lg-block">
+                <ul>
+                    <li><a href="#about">Quienes Somos</a></li>
+                    <li><a href="/equipo">Equipo</a></li>
+                    <li class="drop-down"><a href="#news">Categorias</a>
+                        <ul>
+                            <li>
+                                <form action="/showArticleFromCategory" method="get">
+                                    <button value="Argentina" type="submit" name="category">Argentina</button>
+                                </form> 
+                            </li>
+                            <li>
+                                <form action="/showArticleFromCategory" method="get">
+                                    <button value="África" type="submit" name="category">África</button>
+                                </form> 
+                            </li>
+                            <li>
+                                <form action="/showArticleFromCategory" method="get">
+                                    <button value="Asia y Medio Oriente" type="submit" name="category">Asia y Medio Oriente</button>
+                                </form> 
+                            </li>
+                            <li>
+                                <form action="/showArticleFromCategory" method="get">
+                                    <button value="Europa" type="submit" name="category">Europa</button>
+                                </form> 
+                            </li>                            <li>
+                                <form action="/showArticleFromCategory" method="get">
+                                    <button value="Estados Unidos" type="submit" name="category">Estados Unidos</button>
+                                </form> 
+                            </li>                            <li>
+                                <form action="/showArticleFromCategory" method="get">
+                                    <button value="Latinoamérica" type="submit" name="category">Latinoamérica</button>
+                                </form> 
+                            </li>                            <li>
+                                <form action="/showArticleFromCategory" method="get">
+                                    <button value="Historia" type="submit" name="category">Historia</button>
+                                </form> 
+                            </li>                            <li>
+                                <form action="/showArticleFromCategory" method="get">
+                                    <button value="Avisos" type="submit" name="category">Avisos</button>
+                                </form> 
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div th:if="${session.userSession != null}">
+                            <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}"
+                                class="drop-down">
+                                <a th:text="'Hola, ' + ${session.userSession.name} + '!' "></a>
+                                <ul>
+                                    <li><a style="text-align: right" th:href="@{/{user}(user=${session.userSession.mail})}">Mi Perfil</a></li>
+                                    <li><a style="text-align: right" href="/admin_panel">Panel Administrador</a></li>
+                                    <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
+                                    <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
+                                                viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
+                                                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
+                                            </svg> Cerrar Sesión</a></li>
+                                </ul>
+                            </div>
+                            <div th:if="${session.userSession.usuarioTag == session.userSession.UsuarioTag.EDITOR}"
+                                class="drop-down">
+                                <a th:text="'Hola, ' + ${session.userSession.name} + '!' "></a>
+                                <ul>
+                                    <li><a style="text-align: right" th:href="@{/{user}(user=${session.userSession.mail})}">Mi Perfil</a></li>
+                                    <li><a style="text-align: right" href="/createArticle">Crear Noticia</a></li>
+                                    <li><a style="text-align: right" href="/logout"><svg width="1em" height="1em"
+                                                viewBox="0 0 16 16" class="bi bi-power" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
+                                                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
+                                            </svg> Cerrar Sesión</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div th:unless="${session.userSession != null}">
+                            <a></a>
+                        </div>
+                    </li>
+                </ul>
+            </nav><!-- .nav-menu -->
+
+        </div>
+    </header>
 </div>
-
 </html>
