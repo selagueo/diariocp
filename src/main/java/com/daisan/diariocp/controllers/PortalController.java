@@ -135,7 +135,7 @@ public class PortalController {
     
     @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
     @PostMapping("/addArticle")
-    public String addArticle(@RequestParam String title, @RequestParam String synthesis,
+    public String addArticle(Model modelo, @RequestParam String title, @RequestParam String synthesis,
             @RequestParam String content, @RequestParam String tags,
             @RequestParam MultipartFile photo, @RequestParam String category) {
         
@@ -145,10 +145,13 @@ public class PortalController {
             articleService.AddPost(title, synthesis, content, tags, photo, category);
 
         } catch (ErrorService ex) {
-            System.out.println(ex.getMessage());
+            modelo.addAttribute("errorDatos", ex.getMessage());
+            return "createArticle.html";
         }
+        
 
-        return "createArticle.html";
+
+        return "index.html";
     }
     
     @GetMapping("/showArticleFromCategory")
