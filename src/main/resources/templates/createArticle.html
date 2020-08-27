@@ -45,6 +45,7 @@
             <div class="row">
 
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+        <lable th:if="${errorDatos} != null" th:text="${errorDatos}" style="color:red"></lable>
         <form action="/addArticle" method="POST" enctype="multipart/form-data"/>
             <label for="title">title</label><br>
             <input type="text" name="title" id="title"/><br>

@@ -43,24 +43,17 @@ public class ArticleServices {
         Usuario usuario = (Usuario)session.getAttribute("userSession");
         if(usuario != null)
         {
-            Validate(title, synthesis, content, category);
             Article article = new Article();
+            Validate(title, synthesis, content, category, photo);
+            
 
-            if(!photo.isEmpty() && (photo.getContentType().equalsIgnoreCase("image/jpeg") ||
-                                    photo.getContentType().equalsIgnoreCase("image/jpg")  ||
-                                    photo.getContentType().equalsIgnoreCase("image/bmp")  ||
-                                    photo.getContentType().equalsIgnoreCase("image/png")))
-            {
-                    article.setPhoto(photoService.save(photo));
-            }
-            else
-            {
-                throw new ErrorService("the file has to be jpeg, jpg, png or bmp");
-            }
-          
             if(!tags1.isEmpty())
             {
                 String[] tags2 = tags1.split(" ");
+                if(tags2.length > 10)
+                {
+                    throw new ErrorService("solo puedes poner una maximo de 10 tags");
+                }
                 for(String tag1 : tags2)
                 {
                     Tags tag = new Tags();
@@ -70,6 +63,7 @@ public class ArticleServices {
                 }  
             }
             
+            article.setPhoto(photoService.save(photo));
             article.setCategory(searchCategory(category));
             article.setTitle(title);
             article.setSynthesis(synthesis);
@@ -93,19 +87,38 @@ public class ArticleServices {
     }
     
     
-    private  void Validate(String title, String synthesis, String content, String category) throws ErrorService{
+    private  void Validate(String title, String synthesis, String content, String category, MultipartFile photo) throws ErrorService{
         if(title == null || title.isEmpty()){
-            throw new ErrorService("title cannot be empty");
+            throw new ErrorService("debe completar el titulo");
         }
         if(synthesis == null || synthesis.isEmpty()){
-            throw new ErrorService("synthesis cannot be empty");
+            throw new ErrorService("debe completar la sintesis");
         }
         if(content == null || content.isEmpty()){
-            throw new ErrorService("content cannot be empty");
+            throw new ErrorService("debe completar el cuerpo");
         }
         if(category == null || category.isEmpty()){
-            throw new ErrorService("category cannot be empty");
+            throw new ErrorService("debe elegir una categoria");
         }
+        
+        
+        if(photo.isEmpty() || (!photo.getContentType().equalsIgnoreCase("image/jpeg") &&
+                               !photo.getContentType().equalsIgnoreCase("image/jpg")  &&
+                               !photo.getContentType().equalsIgnoreCase("image/bmp")  &&
+                               !photo.getContentType().equalsIgnoreCase("image/png")))
+        {
+            
+            if(photo.isEmpty())
+            {
+                throw new ErrorService("debe elegir una foto");
+            }
+            else
+            {
+                throw new ErrorService("el formato de la imagenn debe se: jpeg, jpg, bmp o png");
+            }
+
+        }
+
 
     }
     
