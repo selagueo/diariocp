@@ -12,6 +12,7 @@ import com.daisan.diariocp.repositories.TagsRepository;
 import com.daisan.diariocp.repositories.UsuarioRepository;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -155,6 +156,16 @@ public class ArticleServices {
             }
             photosMime.add(article.getPhoto().getMime());
         }
+    }
+    
+    public List<Usuario> GetArticleUser(String id)
+    {
+        List<Usuario> usuarios = new ArrayList();
+        for (Usuario usuario : usuarioRepo.GetUsuarioByUserId(id))
+        {
+            usuarios.add(usuario);
+        }
+        return usuarios;
     }
     
 }

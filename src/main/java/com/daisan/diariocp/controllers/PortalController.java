@@ -144,7 +144,8 @@ public class PortalController {
         }
         return "register_success.html";
     }
-
+    
+    @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
     @GetMapping("/createArticle")
     public String createArticle(Model modelo) {
         modelo.addAttribute("inner", "Crear Noticia");
@@ -177,6 +178,7 @@ public class PortalController {
         
         List<String> photos = new ArrayList();
         List<String> photosMime = new ArrayList();
+        List<String> usuarios = new ArrayList();
         articleService.base64Encoder(photos, photosMime, category);
         
         String desCategory = null;
@@ -217,6 +219,12 @@ public class PortalController {
             
         }
         
+        for(Article article : articleRepo.GetPostFromCategory(articleService.searchCategory(category)))
+        {
+            usuarios.add(article.getUsuario().getName());
+        }
+        
+        model.addAttribute("usuarios", usuarios);
         model.addAttribute("articles", articleRepo.GetPostFromCategory(articleService.searchCategory(category)));
         model.addAttribute("images", photos);
         model.addAttribute("imageMine", photosMime);
