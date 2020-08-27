@@ -74,7 +74,26 @@ public class PortalController {
         
         return "index.html";
     }
-
+    
+    @PostMapping("/adminPanelAction")
+    public String adminPanelAction(Model modelo, @RequestParam String userId, @RequestParam String action){
+        modelo.addAttribute("inner", "Panel de Administración");
+        modelo.addAttribute("usersByTag", userService.LoadUsuariosByTag(UsuarioTag.EDITOR));
+        switch(action){
+            case "actionInformation":{
+                System.out.println("Usuario "+ userId +" action "+ action);
+            }break;
+            case "actionModificar":{
+                System.out.println("Usuario "+ userId +" action "+ action);
+            }break;
+            case "actionBaja":{
+                System.out.println("Usuario "+ userId +" action "+ action);
+            }break;
+            
+        }
+        return "/action_success.html";
+    }
+    
     @GetMapping({"/logout"})
     public String userLogOut() {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
