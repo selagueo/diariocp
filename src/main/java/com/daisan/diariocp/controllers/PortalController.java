@@ -77,25 +77,28 @@ public class PortalController {
     
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/admin_panel")
-    public String admin_panel(Model modelo, @RequestParam(required = false) String userId, @RequestParam(required = false) String action) {
+    public String admin_panel(Model modelo) {
         modelo.addAttribute("inner", "Panel de Administración");
         modelo.addAttribute("usersByTag", userService.LoadUsuariosByTag(UsuarioTag.EDITOR));
-        
+        return "admin_panel.html";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PostMapping("/admin_action")
+    public String admin_action(Model modelo, @RequestParam String userId, @RequestParam String action){        
         if(userId != null & action != null){
+            //NOTE(tomi): al perfil de cada usuario lo redirige java script
             switch(action){
-                case "actionInformation":{
-                    System.out.println("Usuario "+ userId +" action "+ action);
-                }break;
                 case "actionModificar":{
                     System.out.println("Usuario "+ userId +" action "+ action);
                 }break;
                 case "actionBaja":{
-                    System.out.println("Usuario "+ userId +" action "+ action);
+                    userService.swapDeadDate(userId);
                 }break;
 
             }
         }
-        return "admin_panel.html";
+        return "action_success.html";
     }
     
     @GetMapping({"/logout"})

@@ -74,6 +74,19 @@ public class UsuarioServices implements UserDetailsService {
 
         userRepo.save(usuarioTest);
     }
+    
+    @Transactional
+    public void swapDeadDate(String userID){
+        Usuario user = userRepo.findById(userID).get();
+        if(user != null){
+            if(user.getUnRegistration() == null){
+                user.setUnRegistration(new Date());
+            }
+            else{
+                user.setUnRegistration(null);
+            }
+        }
+    } 
 
     public List<Usuario> LoadUsuariosByTag(UsuarioTag tag) {
         List<Usuario> usuarios = userRepo.GetUsuarioByUserTag(tag);
