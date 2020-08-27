@@ -11,12 +11,16 @@ import com.daisan.diariocp.repositories.PhotoRepository;
 import com.daisan.diariocp.repositories.TagsRepository;
 import com.daisan.diariocp.repositories.UsuarioRepository;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -72,7 +76,6 @@ public class ArticleServices {
             article.setUsuario(usuario);
             articleRepo.save(article);
         }
-        
     }
     
     @Transactional
@@ -137,4 +140,21 @@ public class ArticleServices {
             default : return null;
         }
     }
+    
+    public void base64Encoder(List<String> photos, List<String> photosMime, String category) throws UnsupportedEncodingException
+    {
+        for(Article article : articleRepo.GetPostFromCategory(searchCategory(category)))
+        {
+            Optional<Photo> tempPhoto = photoService.getFile(article.getPhoto().getId());
+            if(tempPhoto.isPresent())
+            {
+                Photo photo = tempPhoto.get();
+                byte[] encodeBase64 = Base64.encode(photo.getContent());
+                String base64Encoded = new String(encodeBase64, "UTF-8");
+                photos.add(base64Encoded);
+            }
+            photosMime.add(article.getPhoto().getMime());
+        }
+    }
+    
 }

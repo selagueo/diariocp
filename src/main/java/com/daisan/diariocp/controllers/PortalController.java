@@ -174,19 +174,7 @@ public class PortalController {
         
         List<String> photos = new ArrayList();
         List<String> photosMime = new ArrayList();
-       
-        for(Article article : articleRepo.GetPostFromCategory(articleService.searchCategory(category)))
-        {
-            Optional<Photo> tempPhoto = photoService.getFile(article.getPhoto().getId());
-            if(tempPhoto.isPresent())
-            {
-                Photo photo = tempPhoto.get();
-                byte[] encodeBase64 = Base64.encode(photo.getContent());
-                String base64Encoded = new String(encodeBase64, "UTF-8");
-                photos.add(base64Encoded);
-            }
-            photosMime.add(article.getPhoto().getMime());
-        }
+        articleService.base64Encoder(photos, photosMime, category);
         
         String desCategory = null;
         String colorCategory = null;
