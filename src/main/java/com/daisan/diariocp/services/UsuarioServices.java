@@ -54,7 +54,7 @@ public class UsuarioServices implements UserDetailsService {
         Usuario usuarioTest = userRepo.GetUserFromUserName(userName);
         String newUserName = userName;
         int i = 1;
-        while(usuarioTest != null){
+        while (usuarioTest != null) {
             newUserName = userName + i;
             usuarioTest = userRepo.GetUserFromUserName(newUserName);
             i++;
@@ -74,19 +74,18 @@ public class UsuarioServices implements UserDetailsService {
 
         userRepo.save(usuarioTest);
     }
-    
+
     @Transactional
-    public void swapDeadDate(String userID){
+    public void swapDeadDate(String userID) {
         Usuario user = userRepo.findById(userID).get();
-        if(user != null){
-            if(user.getUnRegistration() == null){
+        if (user != null) {
+            if (user.getUnRegistration() == null) {
                 user.setUnRegistration(new Date());
-            }
-            else{
+            } else {
                 user.setUnRegistration(null);
             }
         }
-    } 
+    }
 
     public List<Usuario> LoadUsuariosByTag(UsuarioTag tag) {
         List<Usuario> usuarios = userRepo.GetUsuarioByUserTag(tag);
@@ -117,10 +116,10 @@ public class UsuarioServices implements UserDetailsService {
         if (password == null || password.isEmpty() || password.length() <= 6) {
             throw new ErrorService("La contrasena debe tener mas de 7 caracteres");
         }
-        if(userRepo.GetUserFromMail(mail) != null){
+        if (userRepo.GetUserFromMail(mail) != null) {
             throw new ErrorService("Ese mail ya se encuentra registrado");
         }
-        if(!password.equals(password2)){
+        if (!password.equals(password2)) {
             throw new ErrorService("Las contasenas deben ser iguales");
         }
     }
@@ -129,23 +128,28 @@ public class UsuarioServices implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario myUser = userRepo.GetUserFromMail(email);
         if (myUser != null) {
+            if (myUser.getUnRegistration() == null) {
+                ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+                HttpSession session = attr.getRequest().getSession(true);
+                session.setAttribute("userSession", myUser);
 
-            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("userSession", myUser);
+                List<GrantedAuthority> perms = new ArrayList<>();
 
-            List<GrantedAuthority> perms = new ArrayList<>();
+                GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_ADMIN");
+                if (myUser.getUsuarioTag() == UsuarioTag.ADMIN) {
+                    perms.add(p1);
+                }
 
-            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_ADMIN");
-            if (myUser.getUsuarioTag() == UsuarioTag.ADMIN) {
-                perms.add(p1);
+                GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_EDITOR");
+                perms.add(p2);
+
+                User user = new User(myUser.getMail(), myUser.getPassword(), perms);
+                return user;
+            } else {
+                System.out.println("Usuario dado de baja");
+                return null;
             }
 
-            GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_EDITOR");
-            perms.add(p2);
-
-            User user = new User(myUser.getMail(), myUser.getPassword(), perms);
-            return user;
         }
         System.out.println("Cannot find user");
         return null;
