@@ -68,7 +68,7 @@
                         <!--<td th:text="${user.mail}" style="font-style: italic" th:value="${user.mail}"></td>-->
                         
                         <td style="text-align: center" class="informacion" id="actionInformation", th:attr="onclick=|goProfile('${user.userName}')|" >
-                            <svg width="1.25em" height="1.25em" viewBox="0 0 16 16"
+                            <svg style="cursor: pointer" width="1.25em" height="1.25em" viewBox="0 0 16 16"
                                 class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
@@ -76,7 +76,7 @@
                         </td>
 
                         <td style="text-align: center" class="modificar" id="actionModificar" th:attr="onclick=|sendAction('${user.id}', 'actionModificar')|">
-                            <svg width="1.25em" height="1.25em" viewBox="0 0 16 16"
+                            <svg style="cursor: pointer" width="1.25em" height="1.25em" viewBox="0 0 16 16"
                                 class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -86,14 +86,14 @@
                         </td>
 
                         <td style="text-align: center"  class="baja" th:if="${user.unRegistration == null}" id="actionBaja" th:attr="onclick=|sendAction('${user.id}', 'actionBaja')|">
-                            <svg width="2.2em" height="2.2em" viewBox="0 0 16 16"
+                            <svg style="cursor: pointer"  width="2.2em" height="2.2em" viewBox="0 0 16 16"
                                 class="bi bi-toggle-on" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
                             </svg>
                         </td>
                         <td style="text-align: center"  class="baja" th:if="${user.unRegistration != null}" id="actionBaja" th:attr="onclick=|sendAction('${user.id}', 'actionBaja')|">
-                            <svg width="2.2em" height="2.2em" viewBox="0 0 16 16" class="bi bi-toggle-off" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <svg  style="cursor: pointer" width="2.2em" height="2.2em" viewBox="0 0 16 16" class="bi bi-toggle-off" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z"/>
                             </svg>
                         </td>
