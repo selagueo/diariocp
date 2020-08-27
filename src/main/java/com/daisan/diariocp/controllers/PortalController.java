@@ -75,23 +75,27 @@ public class PortalController {
         return "index.html";
     }
     
-    @PostMapping("/adminPanelAction")
-    public String adminPanelAction(Model modelo, @RequestParam String userId, @RequestParam String action){
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @GetMapping("/admin_panel")
+    public String admin_panel(Model modelo, @RequestParam(required = false) String userId, @RequestParam(required = false) String action) {
         modelo.addAttribute("inner", "Panel de Administración");
         modelo.addAttribute("usersByTag", userService.LoadUsuariosByTag(UsuarioTag.EDITOR));
-        switch(action){
-            case "actionInformation":{
-                System.out.println("Usuario "+ userId +" action "+ action);
-            }break;
-            case "actionModificar":{
-                System.out.println("Usuario "+ userId +" action "+ action);
-            }break;
-            case "actionBaja":{
-                System.out.println("Usuario "+ userId +" action "+ action);
-            }break;
-            
+        
+        if(userId != null & action != null){
+            switch(action){
+                case "actionInformation":{
+                    System.out.println("Usuario "+ userId +" action "+ action);
+                }break;
+                case "actionModificar":{
+                    System.out.println("Usuario "+ userId +" action "+ action);
+                }break;
+                case "actionBaja":{
+                    System.out.println("Usuario "+ userId +" action "+ action);
+                }break;
+
+            }
         }
-        return "/action_success.html";
+        return "admin_panel.html";
     }
     
     @GetMapping({"/logout"})
@@ -117,14 +121,6 @@ public class PortalController {
     @GetMapping("/profile")
     public String profile() {
         return "/profile.html";
-    }
-
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    @GetMapping("/admin_panel")
-    public String admin_panel(Model modelo) {
-        modelo.addAttribute("inner", "Panel de Administración");
-        modelo.addAttribute("usersByTag", userService.LoadUsuariosByTag(UsuarioTag.EDITOR));
-        return "admin_panel.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")

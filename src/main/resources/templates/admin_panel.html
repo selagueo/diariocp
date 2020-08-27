@@ -118,15 +118,12 @@
 
 </body>
 
-<form action="/adminPanelAction" method="POST" name="sendIdAndAction">
+<form action="/admin_panel" method="GET" name="sendIdAndAction">
 <input type="hidden" name="userId">
 <input type="hidden" name="action">
 </form>
 
 <script>
-    var userID = null;
-    var actionVal = null;
-
     function sendAction(id, action){
         document.sendIdAndAction.userId.value=id;
         document.sendIdAndAction.action.value=action;
