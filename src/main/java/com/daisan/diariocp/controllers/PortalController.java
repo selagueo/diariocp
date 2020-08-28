@@ -221,7 +221,7 @@ public class PortalController {
         
         for(Article article : articleService.GetArticlesFromCategory(category))
         {
-            usuarios.add(article.getUsuario().getName());
+            usuarios.add(article.getUsuario().getName() + " " + article.getUsuario().getLastName());
         }
         
         model.addAttribute("usuarios", usuarios);

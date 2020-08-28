@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/www.thymeleaf.org">
+<html lang="es" xmlns:th="http:/www.thymeleaf.org">
 
     <head>
         <meta charset="utf-8">
@@ -54,15 +54,17 @@
                                             <img th:src="'data:' + ${imageMine[iter.index]} + ';base64,' + ${images[iter.index]}" class="img-fluid" alt="">
                                         </div>
                                         <div class="col-lg-8 d-flex flex-column justify-content">
+                                            <div class="section-title left">
+                                                <p th:text="${#dates.format(articles[iter.index].date, 'dd-MMM-yyyy')}"></p>
+                                            </div>
+
                                             <div class="section-title">
                                                 <h4 th:text="${articles[iter.index].title}"></h4>
                                                 <p th:text="${articles[iter.index].synthesis}"></p>
-                                                
                                             </div> 
                                             
                                             <div class="section-title derecha">
-                                                <p th:text="${usuarios[iter.index]}"></p>
-                                                <p th:text="${articles[iter.index].date}"></p>
+                                                <p th:text="'Escrito por: ' + ${usuarios[iter.index]}"></p>
                                             </div>
                                             
                                         </div>
