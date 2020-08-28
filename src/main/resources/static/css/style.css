@@ -1211,6 +1211,19 @@ section {
     border-radius: 4px;
 }
 
+
+.team .member .perfil {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 11px;
+    border-radius: 0px;
+    width: 100%;
+}
+
 .team .member h4 {
     font-weight: 700;
     margin-bottom: 10px;

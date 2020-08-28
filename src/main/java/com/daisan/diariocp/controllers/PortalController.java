@@ -47,7 +47,7 @@ public class PortalController {
     private PhotoServices photoService;
 
     @GetMapping({"/", "{user}"})
-    public String userProfileAndIndex(Model modelo, @PathVariable(required = false) String user) throws ErrorService{
+    public String userProfileAndIndex(Model modelo, @PathVariable(required = false) String user) throws ErrorService, UnsupportedEncodingException{
         //CREAR Admin
         //userService.AddAdmin("admin","Admin", "Istrador", "1234567", "1234567", "admin@daisansf.com");
         
@@ -65,7 +65,19 @@ public class PortalController {
                     modelo.addAttribute("inner", "Perfil de "+usuario.getName()+" "+usuario.getLastName());
                     modelo.addAttribute("usuario", usuario);
                 }
-                
+                List<String> photos = new ArrayList();
+                List<String> photosMime = new ArrayList(); 
+                List<String> colors = new ArrayList();
+                articleService.base64EncoderId(photos, photosMime, usuario.getId());
+                for(Article article : articleService.GetArticlesFromUser(usuario.getId()))
+                {
+                    articleService.ColorArticle(article.getCategory(), colors);
+                }
+
+                modelo.addAttribute("articles", articleService.GetArticlesFromUser(usuario.getId()));
+                modelo.addAttribute("images", photos);
+                modelo.addAttribute("imageMine", photosMime);
+                modelo.addAttribute("colors", colors);                
                 return "profile.html";
             }
         }

@@ -61,6 +61,41 @@ and open the template in the editor.
 
   </div>
 </section>
+    
+<section id="team" class="team">
+  <div class="container">
+
+      <div class="section-title">
+          <h7>Publicaciones</h7>
+      </div>
+
+      <div class="row">
+
+        
+        
+        <tr th:each="article,iter : ${articles}">
+        <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up">
+              <div class="member">
+                  <a th:href="@{/joselagos}">
+                      <div class="pic">
+                        <img th:src="'data:' + ${imageMine[iter.index]} + ';base64,' + ${images[iter.index]}" class="img-fluid especial" alt="">
+                      </div>
+                  </a>
+                  <div class="member-info perfil" th:style="'background-color:'+${colors[iter.index]}+'; color:white; opacity:0.7'">
+                      <h4  style="font-size:10px" th:text="${articles[iter.index].title}"></h4>
+                  </div>
+              </div>
+          </div>
+        </tr>
+
+
+
+
+          
+      </div>
+
+  </div>
+</section><!-- End Our Team Section -->
 
 </main><!-- End #main -->
  

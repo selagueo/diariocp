@@ -158,12 +158,64 @@ public class ArticleServices {
         }
     }
     
+    
+    public void base64EncoderId(List<String> photos, List<String> photosMime, String id) throws UnsupportedEncodingException
+    {
+        for(Article article : articleRepo.GetPostFromUserId(id))
+        {
+            Optional<Photo> tempPhoto = photoService.getFile(article.getPhoto().getId());
+            if(tempPhoto.isPresent())
+            {
+                Photo photo = tempPhoto.get();
+                byte[] encodeBase64 = Base64.encode(photo.getContent());
+                String base64Encoded = new String(encodeBase64, "UTF-8");
+                photos.add(base64Encoded);
+            }
+            photosMime.add(article.getPhoto().getMime());
+        }
+    }
+    
     public List<Article> GetArticlesFromCategory(String category)
     {
         return articleRepo.GetPostFromCategory(searchCategory(category));
     }
     
+    public List<Article> GetArticlesFromUser(String userId)
+    {
+        return articleRepo.GetPostFromUserId(userId);
+    }  
     
+    
+    public void ColorArticle(Category category, List<String> colors)
+    {
+            switch(category){
+            case ARGENTINA:{
+                colors.add("#087589") ;
+            }break;
+            case AFRICA:{
+                colors.add("#A6570C") ;
+            }break;
+            case ASIA:{
+                colors.add("#54100D") ;
+            }break;
+            case EUROPA:{
+                colors.add("#0F5A15") ;
+            }break;
+            case EEUU:{
+                colors.add("#091851") ;
+            }break;
+            case LATINOAMERICA:{
+                colors.add("#480072") ;
+            }break;
+            case HISTORIA:{
+                colors.add("#000000") ;
+            }break;
+            case UCA:{
+                colors.add("#484B44") ;
+            }break;
+            
+        }
+    }
 
     
 }
