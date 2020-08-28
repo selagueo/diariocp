@@ -31,8 +31,8 @@
     <link href="/css/style.css" rel="stylesheet">
 </head>
 
-<div th:insert="static/header :: header" ></div>
-<div th:insert="static/inner-page :: inner-page" ></div>
+<div th:insert="static/header :: header"></div>
+<div th:insert="static/inner-page :: inner-page"></div>
 
 <main id="main">
 
@@ -50,8 +50,7 @@
                         <div class="form-row">
                             <div class="col-lg-6 form-group">
                                 <input type="email" name="email" class="form-control" id="email"
-                                    placeholder="Correo" data-rule="email"
-                                    data-msg="Ingrese una direccion de correo valida." />
+                                    placeholder="Nombre de Usuario" />
                                 <div class="validate"></div>
                             </div>
                             <div class="col-lg-6 form-group">
@@ -70,9 +69,9 @@
         </div>
     </section>
 </main>
-
-<div th:insert="static/footer :: footer" ></div>
-
+<div>
+    <div th:insert="static/footer :: footer" style="padding-top: 30px"></div>
+</div>
 <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
 <!-- Vendor JS Files -->
