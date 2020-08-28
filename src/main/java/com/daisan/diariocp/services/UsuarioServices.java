@@ -157,8 +157,8 @@ public class UsuarioServices implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario myUser = userRepo.GetUserFromMail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Usuario myUser = userRepo.GetUserFromUserName(username);
         if (myUser != null) {
             if (myUser.getUnRegistration() == null) {
                 ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();

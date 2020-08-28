@@ -49,7 +49,7 @@ public class PortalController {
     @GetMapping({"/", "{user}"})
     public String userProfileAndIndex(Model modelo, @PathVariable(required = false) String user) throws ErrorService{
         //CREAR Admin
-        //userService.AddAdmin("admin","Admin", "Istrador", "1234567", "admin@daisansf.com");
+        //userService.AddAdmin("admin","Admin", "Istrador", "1234567", "1234567", "admin@daisansf.com");
         
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
