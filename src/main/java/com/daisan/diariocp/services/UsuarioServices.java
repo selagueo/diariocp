@@ -1,12 +1,16 @@
 package com.daisan.diariocp.services;
 
+import com.daisan.diariocp.entities.Article;
+import com.daisan.diariocp.entities.Photo;
 import com.daisan.diariocp.entities.Usuario;
 import com.daisan.diariocp.enums.UsuarioTag;
 import com.daisan.diariocp.errors.ErrorService;
 import com.daisan.diariocp.repositories.UsuarioRepository;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -216,4 +221,28 @@ public class UsuarioServices implements UserDetailsService {
         System.out.println("Cannot find user");
         return null;
     }
+    
+    
+    
+    public List<String> base64EncoderId(String id) throws UnsupportedEncodingException
+    {
+        List<String> photos = new ArrayList();
+        Usuario usuario = userRepo.GetUserFromUserId(id);
+        if(usuario.getPhoto() != null){
+            Optional<Photo> tempPhoto = photoService.getFile(usuario.getPhoto().getId());
+
+            if(tempPhoto.isPresent())
+            { 
+                Photo photo1 = tempPhoto.get();
+                byte[] encodeBase64 = Base64.encode(photo1.getContent());
+                String base64Encoded = new String(encodeBase64, "UTF-8");
+                photos.add(base64Encoded);
+                photos.add(usuario.getPhoto().getMime()); 
+                return photos;
+            }
+        }
+        return null;
+    }
+    
+    
 }

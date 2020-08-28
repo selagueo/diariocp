@@ -16,6 +16,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     @Query("SELECT c FROM Usuario c WHERE c.userName = :userName")
     public Usuario GetUserFromUserName(@Param("userName")String userName);
     
+    @Query("SELECT c FROM Usuario c WHERE c.id = :id")
+    public Usuario GetUserFromUserId(@Param("id")String id);
+    
     @Query("SELECT c FROM Usuario c WHERE c.usuarioTag = :tag ORDER BY c.name ASC")
     public List<Usuario> GetUsuarioByUserTag(@Param("tag")UsuarioTag tag);
     

@@ -1,27 +1,21 @@
 package com.daisan.diariocp.controllers;
 
 import com.daisan.diariocp.entities.Article;
-import com.daisan.diariocp.entities.Photo;
 import com.daisan.diariocp.entities.Usuario;
 
 import com.daisan.diariocp.enums.UsuarioTag;
 
 import com.daisan.diariocp.errors.ErrorService;
 import com.daisan.diariocp.repositories.ArticleRepository;
-import com.daisan.diariocp.repositories.UsuarioRepository;
 import com.daisan.diariocp.services.ArticleServices;
 import com.daisan.diariocp.services.PhotoServices;
 import com.daisan.diariocp.services.UsuarioServices;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,16 +48,28 @@ public class PortalController {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
         Usuario usuarioS = (Usuario)session.getAttribute("userSession");
+        if(usuarioS != null && userService.base64EncoderId(usuarioS.getId()) != null){
+            modelo.addAttribute("photoUser", userService.base64EncoderId(usuarioS.getId()));
+        }
+        
         if (user != null) {
             Usuario usuario = userService.getUsuarioByUsername(user);
             if (usuario != null) {
+                System.out.println("usuario enntro");
                 if(usuarioS == null){
                     modelo.addAttribute("inner", "Perfil de "+usuario.getName()+" "+usuario.getLastName());
-                    modelo.addAttribute("usuario", usuario);
+                    modelo.addAttribute("usuario", usuario);                    
+                    if(userService.base64EncoderId(usuario.getId()) != null){
+                        modelo.addAttribute("photoUser", userService.base64EncoderId(usuario.getId()));
+                    }
+                    
                 }
                 else if(!usuario.getId().equals(usuarioS.getId())){
                     modelo.addAttribute("inner", "Perfil de "+usuario.getName()+" "+usuario.getLastName());
-                    modelo.addAttribute("usuario", usuario);
+                    modelo.addAttribute("usuario", usuario);                    
+                    if(userService.base64EncoderId(usuario.getId()) != null){
+                        modelo.addAttribute("photoUser", userService.base64EncoderId(usuario.getId()));
+                    }
                 }
                 List<String> photos = new ArrayList();
                 List<String> photosMime = new ArrayList(); 
@@ -73,11 +79,11 @@ public class PortalController {
                 {
                     articleService.ColorArticle(article.getCategory(), colors);
                 }
-
                 modelo.addAttribute("articles", articleService.GetArticlesFromUser(usuario.getId()));
                 modelo.addAttribute("images", photos);
                 modelo.addAttribute("imageMine", photosMime);
-                modelo.addAttribute("colors", colors);                
+                modelo.addAttribute("colors", colors);  
+                
                 return "profile.html";
             }
         }

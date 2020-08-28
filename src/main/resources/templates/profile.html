@@ -45,6 +45,11 @@ and open the template in the editor.
   <div class="container">
 
     <div>
+        <div class="pic">
+                    
+                   <img th:if="${photoUser != null}
+                        " th:src="'data:' + ${photoUser[1]} + ';base64,' + ${photoUser[0]}" class="img-fluid especial" alt=""> 
+                    
                     <p th:if="${usuario != null}" th:text="${usuario.name}"></p>
                     <p th:if="${usuario != null}" th:text="${usuario.lastName}"></p>
                     <p th:if="${usuario != null}" th:text="${usuario.mail}"></p>
