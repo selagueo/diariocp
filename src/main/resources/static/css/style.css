@@ -182,7 +182,7 @@ div.section-title.derecha p{
     text-transform: uppercase;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 485px) {
 
     #header .logo h1 {
         font-size: 15px;
