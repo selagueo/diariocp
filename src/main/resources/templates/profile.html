@@ -56,6 +56,7 @@ and open the template in the editor.
                     <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.usuarioTag}"></p>
                 </div>
 
+                <a href="/edit_user"  <a th:if="${session.userSession != null && usuario == null}">Editar datos Personales</a><br>
                 <a th:if="${session.userSession != null && usuario == null && session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}" href="/admin_panel" th:text="'Panel de Admin'" >a</a><br>
 
   </div>

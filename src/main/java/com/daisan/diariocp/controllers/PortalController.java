@@ -16,6 +16,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -119,13 +121,34 @@ public class PortalController {
         modelo.addAttribute("inner", "Inicia Sesión");
         return "login.html";
     }
-
+    
     @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
     @GetMapping("/profile")
     public String profile() {
         return "/profile.html";
     }
-
+    
+    @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
+    @GetMapping("/edit_user")
+    public String edit_user(){
+        return "edit_user.html";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
+    @PostMapping("/edit")
+    public String edit(Model modelo, @RequestParam(required = false) String email, @RequestParam(required = false) String password1, @RequestParam(required = false) String password2, 
+            @RequestParam(required = false) String urlInstagram, @RequestParam(required = false) String urlTwitter, @RequestParam(required = false) String urlLinkedIn){
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession(true);
+        Usuario usuarioS = (Usuario)session.getAttribute("userSession");
+        try {
+            userService.edit(usuarioS.getId(), email, password1, password2);
+        } catch (ErrorService ex) {
+            modelo.addAttribute("errorDatos", ex.getMessage());
+        }
+        return "edit_user.html";
+    }
+    
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/register")
     public String register(Model modelo) {

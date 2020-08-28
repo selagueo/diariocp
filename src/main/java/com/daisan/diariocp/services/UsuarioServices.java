@@ -74,7 +74,21 @@ public class UsuarioServices implements UserDetailsService {
 
         userRepo.save(usuarioTest);
     }
-
+    
+    @Transactional
+    public void edit(String userID, String email, String password1, String password2) throws ErrorService{
+        validate(email, password1, password2);
+        
+        String encripPass = new BCryptPasswordEncoder().encode(password1);
+        
+        Usuario user = userRepo.findById(userID).get();
+        if(email != null && !email.isEmpty())
+            user.setMail(email);
+        if(encripPass != null && !encripPass.isEmpty())
+            user.setPassword(encripPass);
+        userRepo.save(user);
+    }
+    
     @Transactional
     public void swapDeadDate(String userID) {
         Usuario user = userRepo.findById(userID).get();
@@ -123,6 +137,18 @@ public class UsuarioServices implements UserDetailsService {
             throw new ErrorService("Las contasenas deben ser iguales");
         }
     }
+    
+    private void validate(String mail, String password, String password2) throws ErrorService {
+         if (userRepo.GetUserFromMail(mail) != null) {
+            throw new ErrorService("Ese mail ya se encuentra registrado");
+        }
+        if (!password.isEmpty() && password.length() <= 6) {
+            throw new ErrorService("La contrasena debe tener mas de 7 caracteres");
+        }
+        if (!password.equals(password2)) {
+            throw new ErrorService("Las contasenas deben ser iguales");
+        }
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -143,7 +169,7 @@ public class UsuarioServices implements UserDetailsService {
                 GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_EDITOR");
                 perms.add(p2);
 
-                User user = new User(myUser.getMail(), myUser.getPassword(), perms);
+                User user = new User(myUser.getUserName(), myUser.getPassword(), perms);
                 return user;
             } else {
                 System.out.println("Usuario dado de baja");
