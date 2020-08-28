@@ -54,6 +54,7 @@
                                             <img th:src="'data:' + ${imageMine[iter.index]} + ';base64,' + ${images[iter.index]}" class="img-fluid" alt="">
                                         </div>
                                         <div class="col-lg-8 d-flex flex-column justify-content">
+                                            
                                             <div class="section-title left">
                                                 <p2 th:text="${#dates.format(articles[iter.index].date, 'dd-MMM-yyyy')}"></p>
                                             </div>
