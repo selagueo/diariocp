@@ -176,10 +176,10 @@ public class UsuarioServices implements UserDetailsService {
             throw new ErrorService("Las contasenas deben ser iguales");
         }
         
-        if(!photo.getContentType().equalsIgnoreCase("image/jpeg") &&
-                               !photo.getContentType().equalsIgnoreCase("image/jpg")  &&
-                               !photo.getContentType().equalsIgnoreCase("image/bmp")  &&
-                               !photo.getContentType().equalsIgnoreCase("image/png"))
+        if(photo != null && (!photo.getContentType().equalsIgnoreCase("image/jpeg") &&
+                             !photo.getContentType().equalsIgnoreCase("image/jpg")  &&
+                             !photo.getContentType().equalsIgnoreCase("image/bmp")  &&
+                             !photo.getContentType().equalsIgnoreCase("image/png")))
         {
            throw new ErrorService("el formato de la imagenn debe se: jpeg, jpg, bmp o png");
         }
