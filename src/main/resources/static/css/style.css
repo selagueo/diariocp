@@ -649,11 +649,15 @@ section {
 .about .container {
     box-shadow: 0 5px 25px 0 rgba(214, 215, 216, 0.6);
 }
-
+@supports(object-fit: cover){
 .about .video-box img {
     padding: 15px 0;
+    object-fit: cover;
+    object-position: center center;
+    max-width: 100%;
+    height: 100%;
 }
-
+}
 .about .section-title p {
     text-align: left;
     font-style: italic;

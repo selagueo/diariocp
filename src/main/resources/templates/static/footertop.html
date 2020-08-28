@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http:/www.thymeleaf.org">
 <div th:fragment="footertop">
     <!-- ======= Footer ======= -->
-    <footer id="footer" th:if="${color != null}">
+    <footer id="footer" th:if="${color != null}" style="padding-bottom: 0px;">
         <div class="footer-top" th:style="'background-color:'+${color}+'; color:white; opacity:1'">
             <div class="container">
                 <div class="row">
@@ -51,7 +51,7 @@
         </div>
     </footer><!-- End Footer -->
     
-    <footer id="footer" th:if="${color == null}">
+    <footer id="footer" th:if="${color == null}" style="padding-bottom: 0px;">
         <div class="footer-top">
             <div class="container">
                 <div class="row">
