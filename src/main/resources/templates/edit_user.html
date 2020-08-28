@@ -98,14 +98,14 @@
                 </div>
 
                 
-            <div class="col-lg-5 form-group">
+                <div class="col-lg-5 form-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">Suba una Foto</span>
+                        <span class="input-group-text" id="inputGroupFileAddon01" style="cursor: pointer" onclick="DrawSetImage()">Suba una Foto</span>
+                    </div >
+                    <div id="imageInput" style="display: none">
+                        <input type="file" class="form-control" placeholder="Titulo" name="photo" id="foto">               
                     </div>
-                 <div class="col-lg-6 form-group">
-                    <input type="file" class="form-control" placeholder="Titulo" name="photo" id="foto">               
                 </div>
-            </div>
 
                 <div class="text-center"><button type="submit" class="btn btn-primary">Guardar Datos</button></div>
               </div>
@@ -153,6 +153,10 @@
         showInput("snInta");
         showInput("snTwit");
         showInput("snLink");
+    }
+
+    function DrawSetImage(){
+        showInput("imageInput");
     }
 
     function showInput(inputId){
