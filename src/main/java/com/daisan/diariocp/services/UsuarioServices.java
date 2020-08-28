@@ -174,8 +174,9 @@ public class UsuarioServices implements UserDetailsService {
 
                 GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_EDITOR");
                 perms.add(p2);
-
+                
                 User user = new User(myUser.getUserName(), myUser.getPassword(), perms);
+                System.out.println("usuario logeado " + user.getUsername());
                 return user;
             } else {
                 System.out.println("Usuario dado de baja");
