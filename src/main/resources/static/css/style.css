@@ -30,9 +30,9 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 
 .section-title {
     text-align: center;
-    padding-bottom: 30px;
-    padding-top: 20px;
-    padding-left: 40px;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-left: 30px;
 
 }
 div.section-title.derecha p{
@@ -577,7 +577,7 @@ section {
 }
 
 .section-title {
-    text-align: center;
+    text-align: left;
     padding-bottom: 30px;
 }
 
@@ -658,6 +658,20 @@ section {
     text-align: left;
     font-style: italic;
     color: #666;
+}
+
+.about .section-title p2 {
+    text-align: left;
+    font-style: normal;
+    color: rgb(39, 37, 37);
+    font-size: 15px;
+}
+
+.about .section-title p3 {
+    text-align: right;
+    font-style: normal;
+    color: rgb(18, 117, 109);
+    font-size: 14px;
 }
 
 .about .about-content {
