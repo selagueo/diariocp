@@ -149,14 +149,14 @@ public class PortalController {
     @PreAuthorize("hasAnyRole('ROLE_EDITOR')")
     @PostMapping("/edit")
     public String edit(Model modelo, @RequestParam(required = false) String email, @RequestParam(required = false) String password1, @RequestParam(required = false) String password2, 
-            @RequestParam(required = false) String urlInstagram, @RequestParam(required = false) String urlTwitter, @RequestParam(required = false) String urlLinkedIn){    
+            @RequestParam(required = false) String urlInstagram, @RequestParam(required = false) String urlTwitter, @RequestParam(required = false) String urlLinkedIn, @RequestParam(required = false) MultipartFile photo){    
         
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession(true);
         Usuario usuarioS = (Usuario)session.getAttribute("userSession");
         if(usuarioS != null){
             try {
-                userService.edit(usuarioS.getId(), email, password1, password2, urlInstagram, urlTwitter, urlLinkedIn);
+                userService.edit(usuarioS.getId(), email, password1, password2, urlInstagram, urlTwitter, urlLinkedIn, photo);
             } catch (ErrorService ex) {
                 modelo.addAttribute("errorDatos", ex.getMessage());
             }
@@ -195,8 +195,6 @@ public class PortalController {
     public String addArticle(Model modelo, @RequestParam String title, @RequestParam String synthesis,
             @RequestParam String content, @RequestParam String tags,
             @RequestParam MultipartFile photo, @RequestParam String category) {
-        
-        String imgName = photo.getOriginalFilename();
 
         try {
             articleService.AddPost(title, synthesis, content, tags, photo, category);

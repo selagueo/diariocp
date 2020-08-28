@@ -20,12 +20,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UsuarioServices implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository userRepo;
+    @Autowired
+    private PhotoServices photoService;
 
     //NOTE(tomi): temporal function to add admin users for testing
     @Transactional
@@ -76,9 +79,9 @@ public class UsuarioServices implements UserDetailsService {
     }
     
     @Transactional
-    public void edit(String userID, String email, String password1, String password2, String urlI, String urlT, String urlL) throws ErrorService{
+    public void edit(String userID, String email, String password1, String password2, String urlI, String urlT, String urlL, MultipartFile photo) throws ErrorService{
         
-        validate(email, password1, password2);
+        validate(email, password1, password2, photo);
         
         boolean usuarioModificado = false;
         Usuario user = userRepo.findById(userID).get();
@@ -102,6 +105,10 @@ public class UsuarioServices implements UserDetailsService {
         if(urlL != null && !urlL.isEmpty()){
             user.setUlrLinkedin(urlL);
             usuarioModificado=true;
+        }
+        if(photo != null && !photo.isEmpty())
+        {
+            user.setPhoto(photoService.save(photo));
         }
         if(usuarioModificado){
             System.out.println("Se han actualizado los datos del usuario");
@@ -157,7 +164,7 @@ public class UsuarioServices implements UserDetailsService {
         }
     }
     
-    private void validate(String mail, String password, String password2) throws ErrorService {
+    private void validate(String mail, String password, String password2, MultipartFile photo) throws ErrorService {
          if (userRepo.GetUserFromMail(mail) != null) {
             throw new ErrorService("Ese mail ya se encuentra registrado");
         }
@@ -166,6 +173,14 @@ public class UsuarioServices implements UserDetailsService {
         }
         if (!password.equals(password2)) {
             throw new ErrorService("Las contasenas deben ser iguales");
+        }
+        
+        if(!photo.getContentType().equalsIgnoreCase("image/jpeg") &&
+                               !photo.getContentType().equalsIgnoreCase("image/jpg")  &&
+                               !photo.getContentType().equalsIgnoreCase("image/bmp")  &&
+                               !photo.getContentType().equalsIgnoreCase("image/png"))
+        {
+           throw new ErrorService("el formato de la imagenn debe se: jpeg, jpg, bmp o png");
         }
     }
 
