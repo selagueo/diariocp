@@ -142,7 +142,7 @@ public class PortalController {
         HttpSession session = attr.getRequest().getSession(true);
         Usuario usuarioS = (Usuario)session.getAttribute("userSession");
         try {
-            userService.edit(usuarioS.getId(), email, password1, password2);
+            userService.edit(usuarioS.getId(), email, password1, password2, urlInstagram, urlTwitter, urlLinkedIn);
         } catch (ErrorService ex) {
             modelo.addAttribute("errorDatos", ex.getMessage());
         }

@@ -76,7 +76,7 @@ public class UsuarioServices implements UserDetailsService {
     }
     
     @Transactional
-    public void edit(String userID, String email, String password1, String password2) throws ErrorService{
+    public void edit(String userID, String email, String password1, String password2, String urlI, String urlT, String urlL) throws ErrorService{
         validate(email, password1, password2);
         
         String encripPass = new BCryptPasswordEncoder().encode(password1);
@@ -86,6 +86,12 @@ public class UsuarioServices implements UserDetailsService {
             user.setMail(email);
         if(encripPass != null && !encripPass.isEmpty())
             user.setPassword(encripPass);
+        if(urlI != null && !urlI.isEmpty())
+            user.setUlrInstagram(urlI);
+        if(urlT != null && !urlT.isEmpty())
+            user.setUlrTwitter(urlT);
+        if(urlL != null && !urlL.isEmpty())
+            user.setUlrLinkedin(urlL);
         userRepo.save(user);
     }
     
