@@ -219,13 +219,13 @@ public class PortalController {
             
         }
         
-        for(Article article : articleRepo.GetPostFromCategory(articleService.searchCategory(category)))
+        for(Article article : articleService.GetArticlesFromCategory(category))
         {
             usuarios.add(article.getUsuario().getName());
         }
         
         model.addAttribute("usuarios", usuarios);
-        model.addAttribute("articles", articleRepo.GetPostFromCategory(articleService.searchCategory(category)));
+        model.addAttribute("articles", articleService.GetArticlesFromCategory(category));
         model.addAttribute("images", photos);
         model.addAttribute("imageMine", photosMime);
         model.addAttribute("inner", desCategory);

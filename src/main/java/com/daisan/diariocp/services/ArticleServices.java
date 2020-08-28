@@ -158,14 +158,12 @@ public class ArticleServices {
         }
     }
     
-    public List<Usuario> GetArticleUser(String id)
+    public List<Article> GetArticlesFromCategory(String category)
     {
-        List<Usuario> usuarios = new ArrayList();
-        for (Usuario usuario : usuarioRepo.GetUsuarioByUserId(id))
-        {
-            usuarios.add(usuario);
-        }
-        return usuarios;
+        return articleRepo.GetPostFromCategory(searchCategory(category));
     }
+    
+    
+
     
 }
