@@ -170,8 +170,8 @@ public class UsuarioServices implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario myUser = userRepo.GetUserFromUserName(username);
+    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+        Usuario myUser = userRepo.GetUserFromMail(mail);
         if (myUser != null) {
             if (myUser.getUnRegistration() == null) {
                 ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -188,7 +188,7 @@ public class UsuarioServices implements UserDetailsService {
                 GrantedAuthority p2 = new SimpleGrantedAuthority("ROLE_EDITOR");
                 perms.add(p2);
                 
-                User user = new User(myUser.getUserName(), myUser.getPassword(), perms);
+                User user = new User(myUser.getMail(), myUser.getPassword(), perms);
                 System.out.println("usuario logeado " + user.getUsername());
                 return user;
             } else {
