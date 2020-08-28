@@ -109,6 +109,7 @@ public class UsuarioServices implements UserDetailsService {
         if(photo != null && !photo.isEmpty())
         {
             user.setPhoto(photoService.save(photo));
+            usuarioModificado=true;
         }
         if(usuarioModificado){
             System.out.println("Se han actualizado los datos del usuario");
