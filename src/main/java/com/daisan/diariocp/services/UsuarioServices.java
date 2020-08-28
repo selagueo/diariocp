@@ -77,22 +77,35 @@ public class UsuarioServices implements UserDetailsService {
     
     @Transactional
     public void edit(String userID, String email, String password1, String password2, String urlI, String urlT, String urlL) throws ErrorService{
+        
         validate(email, password1, password2);
         
-        String encripPass = new BCryptPasswordEncoder().encode(password1);
-        
+        boolean usuarioModificado = false;
         Usuario user = userRepo.findById(userID).get();
-        if(email != null && !email.isEmpty())
+        if(email != null && !email.isEmpty()){
             user.setMail(email);
-        if(encripPass != null && !encripPass.isEmpty())
+            usuarioModificado=true;
+        }
+        if(password1 != null && !password1.isEmpty()){
+            String encripPass = new BCryptPasswordEncoder().encode(password1);
             user.setPassword(encripPass);
-        if(urlI != null && !urlI.isEmpty())
+            usuarioModificado=true;
+        }
+        if(urlI != null && !urlI.isEmpty()){
             user.setUlrInstagram(urlI);
-        if(urlT != null && !urlT.isEmpty())
+            usuarioModificado=true;
+        }
+        if(urlT != null && !urlT.isEmpty()){
             user.setUlrTwitter(urlT);
-        if(urlL != null && !urlL.isEmpty())
+            usuarioModificado=true;
+        }
+        if(urlL != null && !urlL.isEmpty()){
             user.setUlrLinkedin(urlL);
-        userRepo.save(user);
+            usuarioModificado=true;
+        }
+        if(usuarioModificado){
+            System.out.println("Se han actualizado los datos del usuario");
+        }
     }
     
     @Transactional
