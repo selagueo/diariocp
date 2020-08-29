@@ -44,32 +44,13 @@ public class PortalController {
     public String userProfileAndIndex(Model modelo, @PathVariable(required = false) String user) throws ErrorService, UnsupportedEncodingException{
         //CREAR Admin
         //userService.AddAdmin("admin","Admin", "Istrador", "1234567", "1234567", "admin@daisansf.com");
-        
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session = attr.getRequest().getSession(true);
-        Usuario usuarioS = (Usuario)session.getAttribute("userSession");
-        if(usuarioS != null && userService.base64EncoderId(usuarioS.getId()) != null){
-            modelo.addAttribute("photoUser", userService.base64EncoderId(usuarioS.getId()));
-        }
-        
-        if (user != null) {
+        if(user != null){
             Usuario usuario = userService.getUsuarioByUsername(user);
-            if (usuario != null) {
-                System.out.println("usuario enntro");
-                if(usuarioS == null){
-                    modelo.addAttribute("inner", "Perfil de "+usuario.getName()+" "+usuario.getLastName());
-                    modelo.addAttribute("usuario", usuario);                    
-                    if(userService.base64EncoderId(usuario.getId()) != null){
-                        modelo.addAttribute("photoUser", userService.base64EncoderId(usuario.getId()));
-                    }
-                    
-                }
-                else if(!usuario.getId().equals(usuarioS.getId())){
-                    modelo.addAttribute("inner", "Perfil de "+usuario.getName()+" "+usuario.getLastName());
-                    modelo.addAttribute("usuario", usuario);                    
-                    if(userService.base64EncoderId(usuario.getId()) != null){
-                        modelo.addAttribute("photoUser", userService.base64EncoderId(usuario.getId()));
-                    }
+            if(usuario != null){
+                modelo.addAttribute("inner", "Perfil de "+usuario.getName()+" "+usuario.getLastName());
+                modelo.addAttribute("usuario", usuario);
+                if(userService.base64EncoderId(usuario.getId()) != null){
+                    modelo.addAttribute("photoUser", userService.base64EncoderId(usuario.getId()));
                 }
                 List<String> photos = new ArrayList();
                 List<String> photosMime = new ArrayList(); 
@@ -82,19 +63,14 @@ public class PortalController {
                 modelo.addAttribute("articles", articleService.GetArticlesFromUser(usuario.getId()));
                 modelo.addAttribute("images", photos);
                 modelo.addAttribute("imageMine", photosMime);
-                modelo.addAttribute("colors", colors);  
-                
+                modelo.addAttribute("colors", colors);
                 return "profile.html";
             }
         }
-        else{
-            modelo.addAttribute("inner", "Ultimas Noticias");
-        }
-        
-        
+        modelo.addAttribute("inner", "Ultimas Noticias");
         return "index.html";
     }
-    
+          
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/admin_panel")
     public String admin_panel(Model modelo) {

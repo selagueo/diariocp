@@ -43,35 +43,24 @@ and open the template in the editor.
 <main id="main">
 <section class="inner-page">
   <div class="container">
-
-    <div>
         <div class="pic">
-                    
-                   <img th:if="${photoUser != null}
-                        " th:src="'data:' + ${photoUser[1]} + ';base64,' + ${photoUser[0]}" class="img-fluid especial" alt=""> 
-                    
-                    <p th:if="${usuario != null}" th:text="${usuario.name}"></p>
-                    <p th:if="${usuario != null}" th:text="${usuario.lastName}"></p>
-                    <p th:if="${usuario != null}" th:text="${usuario.mail}"></p>
-                    <p th:if="${usuario != null}" th:text="${usuario.usuarioTag}"></p>    
-
-                    <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.name}"></p>
-                    <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.lastName}"></p>
-                    <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.mail}"></p>
-                    <p th:if="${session.userSession != null && usuario == null}" th:text="${session.userSession.usuarioTag}"></p>
-                </div>
-
-                <a href="/edit_user"  <a th:if="${session.userSession != null && usuario == null}">Editar datos Personales</a><br>
-                <a th:if="${session.userSession != null && usuario == null && session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}" href="/admin_panel" th:text="'Panel de Admin'" >a</a><br>
-
-  </div>
+            <img th:if="${photoUser != null}" th:src="'data:' + ${photoUser[1]} + ';base64,' + ${photoUser[0]}" class="img-fluid especial" alt=""> 
+        </div>
+           
+            <p th:if="${usuario != null}" th:text="${usuario.name}"></p>
+            <p th:if="${usuario != null}" th:text="${usuario.lastName}"></p>
+            <p th:if="${usuario != null}" th:text="${usuario.mail}"></p>
+            <p th:if="${usuario != null}" th:text="${usuario.usuarioTag}"></p>    
+      
+             <a href="/edit_user"  <a th:if="${session.userSession != null && session.userSession.id == usuario.id}">Editar datos Personales</a><br>
+             <a th:if="${session.userSession != null && session.userSession.id == usuario.id && session.userSession.usuarioTag == session.userSession.UsuarioTag.ADMIN}" href="/admin_panel" th:text="'Panel de Admin'" ></a><br>
 </section>
     
 <section id="team" class="team">
   <div class="container">
 
-      <div class="section-title">
-          <h7>Publicaciones</h7>
+      <div class="col-xl-3 col-lg-4 col-md-6">
+          <h2>Publicaciones</h2>
       </div>
 
       <div class="row">
